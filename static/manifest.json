@@ -1,0 +1,7 @@
+{
+  "name": "Artari Client",
+  "short_name": "Artari",
+  "icons": [],
+  "start_url": "/",
+  "display": "standalone"
+}

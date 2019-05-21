@@ -1,0 +1,69 @@
+{
+	"name": "artari-front-end",
+	"version": "1.0.0",
+	"repository": "ToDo",
+	"license": "MIT",
+	"description": "Client for Artari project",
+	"main": "pages/index.js",
+	"author": "Guillaume Becker <guillaume@plutusds.com>",
+	"private": true,
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "next start",
+		"now-build": "next build",
+		"format": "prettier-eslint \"**/*.js\"",
+		"eslint-check": "eslint --print-config . | eslint-config-prettier-check"
+	},
+	"dependencies": {
+		"axios": "^0.18.0",
+		"bignumber.js": "^8.1.1",
+		"dotenv": "^8.0.0",
+		"dotenv-webpack": "^1.7.0",
+		"humps": "^2.0.1",
+		"immutable": "^4.0.0-rc.12",
+		"lodash": "^4.17.11",
+		"moment": "^2.24.0",
+		"next": "^8.1.0",
+		"next-offline": "^4.0.0",
+		"next-redux-wrapper": "^3.0.0-alpha.2",
+		"prop-types": "^15.7.2",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"react-redux": "^7.0.3",
+		"redux": "^4.0.1",
+		"redux-devtools-extension": "^2.13.8",
+		"redux-logger": "^3.0.6",
+		"redux-thunk": "^2.3.0",
+		"styled-components": "^4.2.0"
+	},
+	"devDependencies": {
+		"eslint": "^5.16.0",
+		"eslint-config-airbnb": "^17.1.0",
+		"eslint-config-prettier": "^4.3.0",
+		"eslint-plugin-import": "^2.17.2",
+		"eslint-plugin-jsx-a11y": "^6.2.1",
+		"eslint-plugin-react": "^7.13.0",
+		"husky": "^2.3.0",
+		"lint-staged": "^8.1.7",
+		"prettier": "1.17.1",
+		"prettier-eslint": "^8.8.2",
+		"prettier-eslint-cli": "^4.7.1",
+		"snazzy": "^8.0.0"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,css,json,md}": [
+			"prettier --write",
+			"git add"
+		],
+		"*.js": [
+			"eslint --fix",
+			"git add"
+		]
+	}
+}

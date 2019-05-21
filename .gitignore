@@ -1,0 +1,10 @@
+node_modules/
+
+static/sw.js
+
+.next
+.env
+
+*-error.log
+yarn.lock
+
