@@ -61,10 +61,12 @@
 	},
 	"lint-staged": {
 		"*.{js,css,json,md}": [
+			"echo 'Run prettier on *.{js,css,json,md} files...'",
 			"prettier --write",
 			"git add"
 		],
 		"*.js": [
+			"echo 'Run eslint on *.js files...'",
 			"eslint --fix",
 			"git add"
 		]
