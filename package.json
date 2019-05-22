@@ -1,9 +1,9 @@
 {
-	"name": "artari-front-end",
+	"name": "boilerplate-front-end",
 	"version": "1.0.0",
-	"repository": "ToDo",
+	"repository": "https://git-codecommit.us-west-2.amazonaws.com/v1/repos/boilerplate-front-end",
 	"license": "MIT",
-	"description": "Client for Artari project",
+	"description": "Boilerplate project to use from when creating new projects.",
 	"main": "pages/index.js",
 	"author": "Guillaume Becker <guillaume@plutusds.com>",
 	"private": true,
@@ -12,6 +12,7 @@
 		"build": "next build",
 		"start": "next start",
 		"now-build": "next build",
+		"lint": "./node_modules/.bin/eslint --fix ./",
 		"format": "prettier-eslint \"**/*.js\"",
 		"eslint-check": "eslint --print-config . | eslint-config-prettier-check"
 	},
@@ -43,6 +44,7 @@
 		"eslint-config-prettier": "^4.3.0",
 		"eslint-plugin-import": "^2.17.2",
 		"eslint-plugin-jsx-a11y": "^6.2.1",
+		"eslint-plugin-prettier": "^3.1.0",
 		"eslint-plugin-react": "^7.13.0",
 		"husky": "^2.3.0",
 		"lint-staged": "^8.1.7",

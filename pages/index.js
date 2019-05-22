@@ -8,24 +8,24 @@ import Todo from '../components/Todo';
 
 // Port in to using useState hooks, if you need state
 const Index = ({ stars }) => (
-  <div name={`next-repo-stars-${stars}`}>
-    <Todo />
-  </div>
+	<div name={`next-repo-stars-${stars}`}>
+		<Todo />
+	</div>
 );
 
 Index.propTypes = {
-  stars: PropTypes.string.isRequired,
+	stars: PropTypes.string.isRequired
 };
 
 Index.getInitialProps = async ({ store }) => {
-  // Adding a default/initialState can be done as follows:
-  store.dispatch({ type: 'ADD_TODO', text: 'It works!' });
+	// Adding a default/initialState can be done as follows:
+	store.dispatch({ type: 'ADD_TODO', text: 'It works!' });
 
-  const res = await axios.get('https://api.github.com/repos/zeit/next.js');
-  const json = await res.data;
+	const res = await axios.get('https://api.github.com/repos/zeit/next.js');
+	const json = await res.data;
 
-  const nextStars = new BigNumber(json.stargazers_count);
-  return { stars: nextStars };
+	const nextStars = new BigNumber(json.stargazers_count);
+	return { stars: nextStars };
 };
 
 export default connect()(Index);
