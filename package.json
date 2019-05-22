@@ -55,7 +55,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "echo 'toto'"
+			"pre-commit": "lint-staged"
 		}
 	},
 	"lint-staged": {
