@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { addTodo, removeTodo } from '../actions/todo';
 import TodoItem from './TodoItem';
 
-const Title = styled.h1`
+const TitleStyle = styled.h1`
 	font-size: 22px;
 	color: red;
 	margin: 10px;
@@ -33,8 +33,7 @@ const Todo = ({ todos, addTodo, removeTodo }) => {
 
 	return (
 		<div className="mdl-card mdl-shadow--2dp">
-			{/* ToDo: remove after complete setup */}
-			<Title>{process.env.TEST}</Title>
+			<TitleStyle>Add ToDo:</TitleStyle>
 			<form onSubmit={handleAddTodo}>
 				<div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<label className="mdl-textfield__label" htmlFor={inputIdName}>
