@@ -17,7 +17,7 @@ const Layout = ({ title, children }) => (
 		{children}
 
 		<div>
-			{process.env.NODE_ENV !== 'production' ? (
+			{process.env.ENV !== 'production' ? (
 				<aside
 					className="alert alert-danger"
 					style={{
@@ -26,7 +26,7 @@ const Layout = ({ title, children }) => (
 						bottom: '10px'
 					}}
 				>
-					{process.env.NODE_ENV}
+					{process.env.ENV}
 				</aside>
 			) : null}
 		</div>

@@ -1,9 +1,8 @@
 node_modules/
+out/
 
-static/sw.js
-
-.next
-.env
+.next/
+.firebase/
 
 *-error.log
 yarn.lock

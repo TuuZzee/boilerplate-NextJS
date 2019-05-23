@@ -10,13 +10,14 @@
 	"scripts": {
 		"dev": "next",
 		"build": "next build",
+		"export": "rm -rf .next out && next build && next export",
 		"start": "next start",
 		"lint": "./node_modules/.bin/eslint --fix ./",
 		"format": "prettier-eslint \"**/*.js\"",
 		"eslint-check": "eslint --print-config . | eslint-config-prettier-check",
-		"deploy-dev": "npm run build && firebase use default && firebase deploy;",
-		"deploy-qa": "mv .env staging.env && mv qa.env .env && npm run build && firebase use qa && firebase deploy && firebase use default && mv .env qa.env && mv staging.env .env",
-		"deploy-production": "mv .env staging.env && mv production.env .env && npm run build && firebase use production && firebase deploy && firebase use default && mv .env production.env && mv staging.env .env"
+		"deploy-dev": "npm run export && cp ./pages/404.html ./out/ && firebase use default && firebase deploy;",
+		"deploy-qa": "mv .env staging.env && mv qa.env .env && npm run export && cp ./pages/404.html ./out/ && firebase use qa && firebase deploy && firebase use default && mv .env qa.env && mv staging.env .env",
+		"deploy-production": "mv .env staging.env && mv production.env .env && npm run export && cp ./pages/404.html ./out/ && firebase use production && firebase deploy && firebase use default && mv .env production.env && mv staging.env .env"
 	},
 	"dependencies": {
 		"axios": "^0.18.0",
