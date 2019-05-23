@@ -11,7 +11,7 @@ import Todo from '../components/Todo';
 const Index = ({ stars }) => (
 	<Layout>
 		<div name={`next-repo-stars-${stars}`}>
-			<h3 style={{ 'text-align': 'center' }}>Welcome to the Home page</h3>
+			<h3 style={{ textAlign: 'center' }}>Welcome to the Home page</h3>
 		</div>
 		<Todo />
 	</Layout>

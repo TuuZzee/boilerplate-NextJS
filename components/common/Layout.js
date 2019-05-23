@@ -15,6 +15,21 @@ const Layout = ({ title, children }) => (
 		</header>
 
 		{children}
+
+		<div>
+			{process.env.NODE_ENV !== 'production' ? (
+				<aside
+					className="alert alert-danger"
+					style={{
+						position: 'fixed',
+						left: '10px',
+						bottom: '10px'
+					}}
+				>
+					{process.env.NODE_ENV}
+				</aside>
+			) : null}
+		</div>
 	</div>
 );
 

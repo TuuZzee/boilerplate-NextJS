@@ -13,13 +13,17 @@
 		"start": "next start",
 		"lint": "./node_modules/.bin/eslint --fix ./",
 		"format": "prettier-eslint \"**/*.js\"",
-		"eslint-check": "eslint --print-config . | eslint-config-prettier-check"
+		"eslint-check": "eslint --print-config . | eslint-config-prettier-check",
+		"deploy-dev": "npm run build && firebase use default && firebase deploy;",
+		"deploy-qa": "mv .env staging.env && mv qa.env .env && npm run build && firebase use qa && firebase deploy && firebase use default && mv .env qa.env && mv staging.env .env",
+		"deploy-production": "mv .env staging.env && mv production.env .env && npm run build && firebase use production && firebase deploy && firebase use default && mv .env production.env && mv staging.env .env"
 	},
 	"dependencies": {
 		"axios": "^0.18.0",
 		"bignumber.js": "^8.1.1",
 		"dotenv": "^8.0.0",
 		"dotenv-webpack": "^1.7.0",
+		"firebase": "^6.0.2",
 		"humps": "^2.0.1",
 		"immutable": "^4.0.0-rc.12",
 		"localforage": "^1.7.3",

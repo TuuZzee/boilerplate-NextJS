@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "artari-dev",
+    "qa": "artari-qa"
+  }
+}
