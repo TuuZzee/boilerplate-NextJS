@@ -7,7 +7,10 @@ function Nav() {
 			<li>
 				<Link href="/">
 					<a id="nav-link-home" href="/">
-						Home
+						<span className="icon ion-md-home mr-1" name="home">
+							{' '}
+							Home
+						</span>
 					</a>
 				</Link>
 			</li>
