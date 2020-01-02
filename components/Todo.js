@@ -9,52 +9,56 @@ import { addTodo, removeTodo } from '../actions/todo';
 import TodoItem from './TodoItem';
 
 const TitleStyle = styled.h1`
-	font-size: 22px;
-	color: red;
-	margin: 10px;
+  font-size: 22px;
+  color: red;
+  margin: 10px;
 `;
 
 // eslint-disable-next-line no-shadow
 const Todo = ({ todos, addTodo, removeTodo }) => {
-	const [text, changeText] = useState('');
+  const [text, changeText] = useState('');
 
-	const inputIdName = 'todoText';
+  const inputIdName = 'todoText';
 
-	const handleAddTodo = e => {
-		e.preventDefault();
+  const handleAddTodo = e => {
+    e.preventDefault();
 
-		addTodo(text);
-		changeText('');
-	};
+    addTodo(text);
+    changeText('');
+  };
 
-	const handleTextChange = e => {
-		changeText(e.target.value);
-	};
+  const handleTextChange = e => {
+    changeText(e.target.value);
+  };
 
-	return (
-		<div className="mdl-card mdl-shadow--2dp">
-			<TitleStyle>Add ToDo:</TitleStyle>
-			<form onSubmit={handleAddTodo}>
-				<div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-					<label className="mdl-textfield__label" htmlFor={inputIdName}>
-						What must be done?
-					</label>
-					<input
-						id={inputIdName}
-						type="text"
-						value={text}
-						onChange={handleTextChange}
-						className="mdl-textfield__input"
-					/>
-				</div>
-			</form>
-			<ul>
-				{todos.map((todo, i) => (
-					<TodoItem key={`#${i.toString()}-todo`} todo={todo} remove={removeTodo} />
-				))}
-			</ul>
-			<style>
-				{`
+  return (
+    <div className="mdl-card mdl-shadow--2dp">
+      <TitleStyle>Add ToDo:</TitleStyle>
+      <form onSubmit={handleAddTodo}>
+        <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <label className="mdl-textfield__label" htmlFor={inputIdName}>
+            What must be done?
+          </label>
+          <input
+            id={inputIdName}
+            type="text"
+            value={text}
+            onChange={handleTextChange}
+            className="mdl-textfield__input"
+          />
+        </div>
+      </form>
+      <ul>
+        {todos.map((todo, i) => (
+          <TodoItem
+            key={`#${i.toString()}-todo`}
+            todo={todo}
+            remove={removeTodo}
+          />
+        ))}
+      </ul>
+      <style>
+        {`
 				form {
 					background: #fff;
 					padding: 10px;
@@ -83,22 +87,21 @@ const Todo = ({ todos, addTodo, removeTodo }) => {
 					transform: translateY(100px);
 				}
 			`}
-			</style>
-		</div>
-	);
+      </style>
+    </div>
+  );
 };
 
 Todo.propTypes = {
-	todos: PropTypes.arrayOf(PropTypes.shape({ text: PropTypes.string })),
-	addTodo: PropTypes.func.isRequired,
-	removeTodo: PropTypes.func.isRequired
+  todos: PropTypes.arrayOf(PropTypes.shape({ text: PropTypes.string })),
+  addTodo: PropTypes.func.isRequired,
+  removeTodo: PropTypes.func.isRequired,
 };
 
 Todo.defaultProps = {
-	todos: []
+  todos: [],
 };
 
-export default connect(
-	({ todos }) => ({ todos }),
-	{ addTodo, removeTodo }
-)(Todo);
+export default connect(({ todos }) => ({ todos }), { addTodo, removeTodo })(
+  Todo
+);
