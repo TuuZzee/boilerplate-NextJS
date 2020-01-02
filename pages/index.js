@@ -4,17 +4,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import en from 'react-intl/locale-data/en';
-import ko from 'react-intl/locale-data/ko';
-import { addLocaleData, IntlProvider } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import flattenMessages from '../utils/i18n';
 import locale from '../locale/home';
 
 import Layout from '../components/common/Layout';
 import Todo from '../components/Todo';
 import MainTitle from '../containers/MainTitle';
-
-addLocaleData([...en, ...ko]);
 
 class Index extends Component {
 	static async getInitialProps() {
@@ -25,6 +21,7 @@ class Index extends Component {
 		return { stars: nextStars.toString() };
 		// return '0';
 	}
+
 	// Port in to using useState hooks, if you need state
 	render() {
 		const { stars } = this.props;
