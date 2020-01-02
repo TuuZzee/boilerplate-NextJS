@@ -15,7 +15,7 @@ function Nav() {
 				</Link>
 			</li>
 			<li>
-				<Link href="/about">
+				<Link href="/about" as="/about">
 					<a id="nav-link-about" href="/about">
 						About
 					</a>
