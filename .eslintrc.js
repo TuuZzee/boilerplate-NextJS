@@ -6,8 +6,9 @@ module.exports = {
   extends: [
     'airbnb',
     'eslint:recommended',
-    'plugin:react/recommended',
     'plugin:prettier/recommended',
+    'plugin:react/recommended',
+    'plugin:security/recommended',
     'prettier',
     'prettier/babel',
     'prettier/react'
@@ -23,7 +24,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'react-hooks', 'no-secrets', 'prettier', 'security'],
   rules: {
     'jsx-a11y/anchor-is-valid': [
       'error',
@@ -31,6 +32,11 @@ module.exports = {
         components: ['Link'],
         specialLink: ['to']
       }
+    ],
+    'no-secrets/no-secrets': 'error',
+    'no-underscore-dangle': [
+      'error',
+      { allow: ['__REDUX_DEVTOOLS_EXTENSION__'] }
     ],
     'prettier/prettier': [
       'error',
@@ -41,10 +47,6 @@ module.exports = {
         trailingComma: 'es5',
         useTabs: false
       }
-    ],
-    'no-underscore-dangle': [
-      'error',
-      { allow: ['__REDUX_DEVTOOLS_EXTENSION__'] }
     ],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }]
   }
