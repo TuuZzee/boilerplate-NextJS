@@ -2,48 +2,16 @@
 
 require('dotenv').config();
 
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
-
 module.exports = {
   crossOrigin: 'anonymous',
-  webpack: config => {
-    config.plugins = config.plugins || [];
-
-    config.plugins = [
-      ...config.plugins,
-
-      // Read the .env file
-      new Dotenv({
-        path: path.join(__dirname, '.env'),
-        systemvars: true,
-      }),
-    ];
-
-    config.module.rules.push(
-      {
-        test: /\.(css|scss)/,
-        loader: 'emit-file-loader',
-        options: {
-          name: 'dist/[path][name].[ext]',
-        },
-      },
-      {
-        test: /\.css$/,
-        loader: 'babel-loader!raw-loader',
-      },
-      {
-        test: /\.scss$/,
-        loader: 'babel-loader!raw-loader!sass-loader',
-      }
-    );
-
-    return config;
-  },
-  exportPathMap() {
-    return {
-      '/': { page: '/' },
-      '/about': { page: '/about' },
-    };
+  target: 'experimental-serverless-trace',
+  env: {
+    ENV: process.env.ENV,
+    FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
+    FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
+    FIREBASE_DB_URL: process.env.FIREBASE_DB_URL,
+    FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
+    FIREBASE_STORAGE_BKT: process.env.FIREBASE_STORAGE_BKT,
+    FIREBASE_MESSENGING_SENDER_ID: process.env.FIREBASE_MESSENGING_SENDER_ID,
   },
 };

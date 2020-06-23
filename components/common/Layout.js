@@ -2,7 +2,6 @@ import React from 'react';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import { Alert } from 'reactstrap';
-import Styles from '../../css/index.scss';
 
 import Nav from './Nav';
 
@@ -10,8 +9,6 @@ const Layout = ({ title, children }) => (
   <div>
     <Head>
       <title>{title}</title>
-      {/* eslint-disable-next-line react/no-danger */}
-      <style dangerouslySetInnerHTML={{ __html: Styles }} />
     </Head>
 
     <header>
@@ -24,12 +21,12 @@ const Layout = ({ title, children }) => (
       <>
         <Alert color="danger">{process.env.ENV}</Alert>
         <style>{`
-					.alert.alert-danger {
-						position: fixed;
-						left: 10px;
-						bottom: 10px;
-					}
-				`}</style>
+            .alert.alert-danger {
+                position: fixed;
+                left: 10px;
+                bottom: 10px;
+            }
+        `}</style>
       </>
     ) : null}
   </div>

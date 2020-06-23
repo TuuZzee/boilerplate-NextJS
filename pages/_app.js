@@ -7,6 +7,8 @@ import withRedux from 'next-redux-wrapper';
 
 import initStore from '../utils/store';
 
+import '../css/index.scss';
+
 /* debug to log how the store is being used */
 export default withRedux(initStore, {
   debug: typeof window !== 'undefined' && process.env.NODE_ENV !== 'production',
