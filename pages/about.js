@@ -6,7 +6,7 @@ import Layout from '../components/common/Layout';
 function About() {
   return (
     <Layout>
-      <h3 style={{ textAlign: 'center' }}>Add Amplify.</h3>
+      <h3 style={{ textAlign: 'center' }}>Add Babel settings</h3>
     </Layout>
   );
 }

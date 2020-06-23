@@ -15,13 +15,14 @@
     "lint": "./node_modules/.bin/eslint --fix ./",
     "format": "prettier-eslint --write $PWD/'src/**/*.[jt]s?(x)' && eslint --fix .",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
-    "deploy-dev": "npm run export && cp ./pages/404.html ./out/ && firebase use default && firebase deploy;",
-    "deploy-qa": "mv .env staging.env && mv qa.env .env && npm run export && cp ./pages/404.html ./out/ && firebase use qa && firebase deploy && firebase use default && mv .env qa.env && mv staging.env .env",
-    "deploy-production": "mv .env staging.env && mv production.env .env && npm run export && cp ./pages/404.html ./out/ && firebase use production && firebase deploy && firebase use default && mv .env production.env && mv staging.env .env"
+    "deploy-firebaseHost-dev": "npm run export && cp ./pages/404.html ./out/ && firebase use default && firebase deploy;",
+    "deploy-firebaseHost-qa": "mv .env staging.env && mv qa.env .env && npm run export && cp ./pages/404.html ./out/ && firebase use qa && firebase deploy && firebase use default && mv .env qa.env && mv staging.env .env",
+    "deploy-firebaseHost-production": "mv .env staging.env && mv production.env .env && npm run export && cp ./pages/404.html ./out/ && firebase use production && firebase deploy && firebase use default && mv .env production.env && mv staging.env .env"
   },
   "dependencies": {
     "aws-amplify": "^3.0.18",
     "axios": "^0.19.2",
+    "babel-plugin-styled-components": "^1.10.7",
     "bignumber.js": "^9.0.0",
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",

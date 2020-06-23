@@ -10,7 +10,7 @@ import TodoItem from './TodoItem';
 
 const TitleStyle = styled.h1`
   font-size: 22px;
-  color: red;
+  color: green;
   margin: 10px;
 `;
 
@@ -59,34 +59,34 @@ const Todo = ({ todos, addTodo, removeTodo }) => {
       </ul>
       <style>
         {`
-				form {
-					background: #fff;
-					padding: 10px;
-				}
-				ul {
-					min-height: 100px;
-					margin: 0;
-					padding: 0;
-					text-align: left;
-					list-style: none;
-				}
-				ul li {
-					padding: 10px;
-					background: #FFF;
-					border-bottom: 1px solid #EEE;
-				}
-				ul li:nth-child(2n) {
-					background: #EEF6FF;
-				}
-				ul li:last-child {
-					border-bottom: none;
-				}
-				.mdl-card {
-					margin: auto;
-					transition: all .3s;
-					transform: translateY(100px);
-				}
-			`}
+            form {
+                background: #fff;
+                padding: 10px;
+            }
+            ul {
+                min-height: 100px;
+                margin: 0;
+                padding: 0;
+                text-align: left;
+                list-style: none;
+            }
+            ul li {
+                padding: 10px;
+                background: #FFF;
+                border-bottom: 1px solid #EEE;
+            }
+            ul li:nth-child(2n) {
+                background: #EEF6FF;
+            }
+            ul li:last-child {
+                border-bottom: none;
+            }
+            .mdl-card {
+                margin: auto;
+                transition: all .3s;
+                transform: translateY(100px);
+            }
+        `}
       </style>
     </div>
   );

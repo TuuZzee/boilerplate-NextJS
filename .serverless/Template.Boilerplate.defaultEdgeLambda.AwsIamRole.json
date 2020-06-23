@@ -1,9 +1,0 @@
-{
-  "name": "aokr7c-3ky4it",
-  "arn": "arn:aws:iam::916989080723:role/aokr7c-3ky4it",
-  "service": ["edgelambda.amazonaws.com", "lambda.amazonaws.com"],
-  "policy": {
-    "arn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-  },
-  "region": "us-east-1"
-}
