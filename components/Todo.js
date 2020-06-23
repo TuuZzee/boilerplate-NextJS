@@ -50,11 +50,7 @@ const Todo = ({ todos, addTodo, removeTodo }) => {
       </form>
       <ul>
         {todos.map((todo, i) => (
-          <TodoItem
-            key={`#${i.toString()}-todo`}
-            todo={todo}
-            remove={removeTodo}
-          />
+          <TodoItem key={`#${i.toString()}-todo`} todo={todo} remove={removeTodo} />
         ))}
       </ul>
       <style>
@@ -102,6 +98,4 @@ Todo.defaultProps = {
   todos: [],
 };
 
-export default connect(({ todos }) => ({ todos }), { addTodo, removeTodo })(
-  Todo
-);
+export default connect(({ todos }) => ({ todos }), { addTodo, removeTodo })(Todo);
