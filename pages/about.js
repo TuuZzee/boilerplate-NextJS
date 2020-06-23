@@ -6,9 +6,7 @@ import Layout from '../components/common/Layout';
 function About() {
   return (
     <Layout>
-      <h3 style={{ textAlign: 'center' }}>
-        Add Eslint latest config + Firebase setup without config
-      </h3>
+      <h3 style={{ textAlign: 'center' }}>Reset package-lock.json file</h3>
     </Layout>
   );
 }
