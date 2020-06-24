@@ -6,7 +6,7 @@ import Layout from 'src/components/common/Layout';
 function About() {
   return (
     <Layout>
-      <h3 style={{ textAlign: 'center' }}>add minor pkgs</h3>
+      <h3 style={{ textAlign: 'center' }}>Update some more pkgs</h3>
     </Layout>
   );
 }
