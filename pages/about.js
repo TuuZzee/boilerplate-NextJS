@@ -6,7 +6,7 @@ import Layout from 'src/components/common/Layout';
 function About() {
   return (
     <Layout>
-      <h3 style={{ textAlign: 'center' }}>Update some pkgs, add next-images.</h3>
+      <h3 style={{ textAlign: 'center' }}>Update pkgs next-redux-wrapper</h3>
     </Layout>
   );
 }

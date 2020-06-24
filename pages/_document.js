@@ -39,8 +39,8 @@ export default class MyDocument extends Document {
             content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui"
           />
 
-          <link rel="manifest" href="static/manifest.json" />
-          <link rel="icon" href="static/img/favicon.ico" />
+          <link rel="manifest" href="manifest.json" />
+          <link rel="icon" href="img/favicon.ico" />
 
           {/* CSS imports */}
           <link
