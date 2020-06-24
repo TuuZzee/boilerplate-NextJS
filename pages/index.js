@@ -5,12 +5,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { IntlProvider } from 'react-intl';
-import flattenMessages from '../utils/i18n';
-import locale from '../locale/home';
+import flattenMessages from 'src/utils/i18n';
+import locale from 'src/locale/home';
 
-import Layout from '../components/common/Layout';
-import Todo from '../components/Todo';
-import MainTitle from '../containers/MainTitle';
+import Layout from 'src/components/common/Layout';
+import Todo from 'src/components/Todo';
+import MainTitle from 'src/components/MainTitle';
 
 class Index extends Component {
   static async getInitialProps() {

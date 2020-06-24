@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import styled from 'styled-components';
-import { addTodo, removeTodo } from '../actions/todo';
+import { addTodo, removeTodo } from 'src/redux/modules/todos';
 import TodoItem from './TodoItem';
 
 const TitleStyle = styled.h1`

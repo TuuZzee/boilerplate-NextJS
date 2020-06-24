@@ -5,10 +5,10 @@ import { Provider } from 'react-redux';
 import App from 'next/app';
 import withRedux from 'next-redux-wrapper';
 
-import firebaseApp from 'utils/firebaseApp';
-import initStore from '../utils/store';
+import firebaseApp from 'src/utils/firebaseApp';
+import initStore from 'src/redux/store';
 
-import '../css/index.scss';
+import 'src/styles/index.scss';
 
 /* debug to log how the store is being used */
 export default withRedux(initStore)(

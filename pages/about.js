@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Layout from '../components/common/Layout';
+import Layout from 'src/components/common/Layout';
 
 // pages/about.js
 function About() {
   return (
     <Layout>
-      <h3 style={{ textAlign: 'center' }}>Reset package-lock.json file</h3>
+      <h3 style={{ textAlign: 'center' }}>Folder/files structures changes</h3>
     </Layout>
   );
 }

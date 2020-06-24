@@ -34,10 +34,7 @@ const Layout = ({ title, children }) => (
 
 Layout.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 Layout.defaultProps = {
