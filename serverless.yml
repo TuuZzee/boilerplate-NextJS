@@ -1,0 +1,11 @@
+# serverless.yml
+# https://github.com/danielcondemarin/serverless-next.js
+
+Boilerplate:
+  component: serverless-next.js@1.15.0-alpha.0
+  inputs:
+    useServerlessTraceTarget: true
+    bucketName: "boilerplate"
+    description: "Boilerplate Client NextJS Lambda@Edge for Cloudfront distribution"
+    name:
+      defaultLambda: boilerplateLambdaEdge
