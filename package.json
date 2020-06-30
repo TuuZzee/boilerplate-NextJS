@@ -5,7 +5,7 @@
   "license": "MIT",
   "description": "Boilerplate project to use from when creating new projects.",
   "main": "pages/index.js",
-  "author": "Guillaume Becker",
+  "author": "TuuZzee",
   "private": true,
   "scripts": {
     "dev": "next",
