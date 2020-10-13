@@ -1,0 +1,47 @@
+# Basic build, currently only push all files to S3 bucket
+# Next step for full deployment including Cloudfront -> https://gist.github.com/rbalicki2/30e8ee5fb5bc2018923a06c5ea5e3ea5
+name: Serverless Deployment to QA
+
+# Uncomment when needed
+# on:
+#   push:
+#     branches: [ qa ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: NPM Install
+      run: |
+        npm install
+
+    - name: Get the .env from the QA build folder
+      run: |
+        mv ./build/qa/qa.env .env
+    - name: Get the serverless.yml from the QA build folder
+      run: |
+        mv ./build/qa/serverless.yml serverless.yml
+    - name: Get the .serverless from the QA build folder
+      run: |
+        mv ./build/qa/.serverless .serverless
+
+    - name: Deploy to QA
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_QA_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_QA_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+      run:
+        npm run deploy
+

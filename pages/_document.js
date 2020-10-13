@@ -1,5 +1,5 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
           {/* Meta */}
           <meta
@@ -55,6 +55,14 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://code.getmdl.io/1.3.0/material.deep_purple-blue.min.css"
           />
+
+          {/* Scripts */}
+          <script src="https://kit.fontawesome.com/4133372eed.js" crossOrigin="anonymous" />
+          {/* Uncomment if needed
+          <script
+            src="https://www.datadoghq-browser-agent.com/datadog-rum.js"
+            type="text/javascript"
+          /> */}
         </Head>
         <body>
           <Main />
@@ -63,7 +71,7 @@ export default class MyDocument extends Document {
           {/* JS scripts imports */}
           <script defer src="https://code.getmdl.io/1.3.0/material.min.js" />
         </body>
-      </html>
+      </Html>
     );
   }
 }

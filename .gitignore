@@ -114,7 +114,7 @@ dist/
 
 # Serverless directories
 .serverless_nextjs/
-.serverless/
+# .serverless/
 
 # FuseBox cache
 .fusebox/

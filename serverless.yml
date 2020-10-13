@@ -2,7 +2,7 @@
 # https://github.com/danielcondemarin/serverless-next.js
 
 Boilerplate:
-  component: serverless-next.js@1.15.0-alpha.0
+  component: serverless-next.js@1.15.0-alpha.2
   inputs:
     useServerlessTraceTarget: true
     bucketName: "fe-boilerplate"

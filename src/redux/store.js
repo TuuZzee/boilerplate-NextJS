@@ -1,16 +1,18 @@
-import { createStore, compose, applyMiddleware } from 'redux';
 import ReduxLogger from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
-import rootReducer from './modules';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createWrapper } from 'next-redux-wrapper';
 
-const enhancers = compose(
-  typeof window !== 'undefined' && process.env.NODE_ENV !== 'production'
-    ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    : f => f,
-);
+import reducer from './modules';
 
 const middlewares = [ReduxThunk, ReduxLogger];
+const createWithMiddleware = composeWithDevTools(applyMiddleware(...middlewares));
 
-const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
+const makeStore = initialState => {
+  return createStore(reducer, initialState, createWithMiddleware);
+};
 
-export default initialState => createStoreWithMiddleware(rootReducer, initialState, enhancers);
+const wrapper = createWrapper(makeStore, { debug: true });
+
+export default wrapper;

@@ -14,6 +14,7 @@ module.exports = {
     'prettier/babel',
     'prettier/react',
     'plugin:security/recommended',
+    'plugin:lodash-fp/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -27,7 +28,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'react-hooks', 'prettier', 'no-secrets', 'security', 'import'],
+  plugins: ['react', 'react-hooks', 'prettier', 'no-secrets', 'security', 'import', 'lodash-fp'],
   rules: {
     'no-nested-ternary': 'off',
     'security/detect-object-injection': 'off',
@@ -99,12 +100,6 @@ module.exports = {
     ],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    'react/prop-types': [
-      'error',
-      {
-        ignore: ['intl', 'router', 'firestore', 'firebase'],
-      },
-    ],
   },
   settings: {
     'import/resolver': {

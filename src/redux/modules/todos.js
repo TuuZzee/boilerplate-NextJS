@@ -1,7 +1,21 @@
 export const ADD_TODO = 'ADD_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
 
-export default function (state = [], action) {
+export function addTodo(text) {
+  return {
+    type: ADD_TODO,
+    text,
+  };
+}
+
+export function removeTodo(todo) {
+  return {
+    type: REMOVE_TODO,
+    todo,
+  };
+}
+
+const todoReducer = (state = [], action) => {
   const { type, text, todo } = action;
 
   switch (type) {
@@ -18,18 +32,6 @@ export default function (state = [], action) {
     default:
       return state;
   }
-}
+};
 
-export function addTodo(text) {
-  return {
-    type: ADD_TODO,
-    text,
-  };
-}
-
-export function removeTodo(todo) {
-  return {
-    type: REMOVE_TODO,
-    todo,
-  };
-}
+export default todoReducer;

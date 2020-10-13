@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@/reduxModules/*": ["src/redux/modules/*"],
+      "@/customContext/*": ["src/contexts/*"],
+      "@/locale/*": ["src/locale/*"],
+      "@/styles/*": ["src/styles/*"],
+      "@/utils/*": ["src/utils/*"]
+    }
   }
 }
