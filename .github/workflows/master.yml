@@ -1,0 +1,52 @@
+# Basic build, currently only push all files to S3 bucket
+# Next step for full deployment including Cloudfront -> https://gist.github.com/rbalicki2/30e8ee5fb5bc2018923a06c5ea5e3ea5
+name: Serverless Deployment to Production
+
+# Uncomment when needed
+# on:
+#   push:
+#     branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: NPM Install
+      run: |
+        npm install
+
+    - name: Get the .env from the Production build folder
+      run: |
+        mv ./build/production/production.env .env
+    - name: Get the serverless.yml from the Production build folder
+      run: |
+        mv ./build/production/serverless.yml serverless.yml
+    - name: Get the .serverless from the Production build folder
+      run: |
+        mv ./build/production/.serverless .serverless
+
+    - name: Deploy to Production
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PRODUCTION_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PRODUCTION_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+      run:
+        npm run deploy
+
+    - name: Deploy SourceMaps to DataDog
+      env:
+        DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+      run:
+        npm run deploy-sourcemaps-prod

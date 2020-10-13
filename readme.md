@@ -1,22 +1,39 @@
 # Front-end Boilerplate
 
-This repository contains the base boilerplate which we are going to use as a base to start most of the company front-end project. The motivation is to have a set of tools already configured in order to be able to start right away in a consistent manner. There is going to be changes and updates along the way so keep posted! :)
+This repository contains the base boilerplate which we are going to use as a base to start most of
+the company front-end project. The motivation is to have a set of tools already configured in order
+to be able to start right away in a consistent manner. There is going to be changes and updates
+along the way so keep posted! :)
 
-This boilerplate is made from [NextJS](https://nextjs.org/), and is coming with the following packages installed and configured:
+This boilerplate is made using [NextJS](https://nextjs.org/), and is coming with the following
+packages pre-installed and pre-configured:
 
 - [React](https://reactjs.org/) _JavaScript library for creating user interfaces_
-- [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes) _Runtime type checking for React props and similar objects._
+- [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes) _Runtime type
+  checking for React props and similar objects._
 - [Redux](https://redux.js.org/) _Predictable state container for JavaScript apps_
-- [Redux Thunk](https://github.com/reduxjs/redux-thunk) Thunk middleware for Redux.\_
-- [Immutable](https://github.com/immutable-js/immutable-js) _Provides many Persistent Immutable data structures_
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk) _Thunk middleware for Redux._
+- [Immutable](https://github.com/immutable-js/immutable-js) _Provides many Persistent Immutable data
+  structures_
+- [React Query](https://github.com/tannerlinsley/react-query) _Hooks for fetching, caching and
+  updating asynchronous data in React_
 - [Axios](https://github.com/axios/axios) _Promise based HTTP client for the browser and node.js_
-- [Eslint](https://eslint.org/) _Tool for identifying and reporting on patterns found in ECMAScript/JavaScript code_
+- [AWS Amplify](https://github.com/aws-amplify/amplify-js) _AWS Amplify provides a declarative and
+  easy-to-use interface across different categories of cloud operations._
+- [Eslint](https://eslint.org/) _Tool for identifying and reporting on patterns found in
+  ECMAScript/JavaScript code_
 - [Prettier](https://prettier.io/) _Prettier is an opinionated code formatter_
-- [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) and [Reactstrap](https://reactstrap.github.io/) with Bootstrap components for React
-  ... And even more :)
-  [Note]: for more details check the `package.json` file.
+- [react-redux-toastr](https://github.com/diegoddox/react-redux-toastr) _React toastr message
+  implemented with Redux_
+- [reactstrap](https://reactstrap.github.io/) _Easy to use React Bootstrap 4 components_ ... And
+  even more :)
+- [Serverless-NextJS](https://github.com/serverless-nextjs/serverless-next.js) _A zero configuration
+  Next.js serverless component for AWS Lambda@Edge aiming for full feature parity._ and some others
+  always usefull and cool packages such as BigNumber, Moment, Lodash/fp ... [Note]: for more details
+  check the `package.json` file.
 
-When starting a new project, fork from this one a create a new repository. For feature/bug fixing you can open a PR from the project or create a Issue on the repository.
+This can be used as a template to create new repositories and projects. For feature/bug fixing you
+can open a PR from the project or create a Issue on the repository.
 
 ## Contents
 
@@ -27,51 +44,28 @@ When starting a new project, fork from this one a create a new repository. For f
 
 ### Requirements
 
-You need to have `npm` installed.
+You need to have `npm` or `yarn` installed. Recommand using [n](https://github.com/tj/n) to manage
+node version more easely.
 
 ```sh
 brew install npm
 ```
 
-This boilerplate is using Firebase hosting to deploy as a static HTML PWA.
-
-```sh
-npm install -g firebase-tools
-```
+For deployment you will need a AWS account.
+[Serverless-NextJS](https://github.com/serverless-nextjs/serverless-next.js) is used for CI/CD.
 
 ### Installation
 
-Clone repo:
+> This repository can be used as a template
+
+First clone the repository, then install the dependencies:
 
 ```sh
-git clone https://git-codecommit.us-west-2.amazonaws.com/v1/repos/boilerplate-front-end
-cd boilerplate-front-end
-```
-
-Install the dependencies:
-
-```sh
+# With Yarn
 yarn install
-```
 
-or
-
-```sh
+# With npm
 npm install
-```
-
-Get your credential for Firebase and proceed to the installation:
-
-```sh
-firebase login                    # Request Firebase project access beforehand
-firebase init                     # Follow the instruction from the promp
-```
-
-[Note]: Use `NAME_OF_PROJECT-dev` as the default environment, select hosting and for SPA input NO.
-Add the other envs so you are able to deploy
-
-```sh
-firebase use --add                # Follow the instruction from the promp
 ```
 
 ### Development Workflow
@@ -79,39 +73,31 @@ firebase use --add                # Follow the instruction from the promp
 Start a live-reload development server:
 
 ```sh
+# With Yarn
 yarn dev
-```
 
-or
-
-```sh
+# With npm
 npm run dev
 ```
 
 Generate a production build:
 
 ```sh
+# With Yarn
 yarn build
-```
 
-or
-
-```sh
+# With npm
 npm run build
 ```
 
-To deploy to DEV/QA/PRODUCTION environment:
-
-```sh
-npm run deploy-dev                # For QA: deploy-qa; For Production: deploy-prod
-```
-
-[Note] This project is using `dotenv-webpack` package to manage env values. Each env has is own file, dev is using `.env`.
+[Note] This project is using `dotenv-webpack` package to manage env values. Each env has is own
+file, dev is using `.env`.
 
 ### Tools and scripts
 
-The project is using `husky` and `lint-staged` with which are configure to run on git pre-commit hooks
-During this phase the code is going to be checked with Eslint and Prettier and auto-formated/fixed when possible.
+The project is using `husky` and `lint-staged` with which are configure to run on git pre-commit
+hooks During this phase the code is going to be checked with Eslint and Prettier and
+auto-formated/fixed when possible.
 
 How to run Eslint (from root file):
 

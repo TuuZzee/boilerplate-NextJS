@@ -1,7 +1,0 @@
-{
-	"name": "Boilerplate Client front-end",
-	"short_name": "POC front-end",
-	"icons": [],
-	"start_url": "/",
-	"display": "standalone"
-}
