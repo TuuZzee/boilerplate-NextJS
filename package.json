@@ -31,7 +31,7 @@
     "dotenv-webpack": "^1.8.0",
     "firebase": "^7.15.3",
     "humps": "^2.0.1",
-    "immer": "^6.0.8",
+    "immer": "^8.0.1",
     "install": "^0.13.0",
     "jquery": "^3.5.1",
     "jwt-decode": "^2.2.0",
