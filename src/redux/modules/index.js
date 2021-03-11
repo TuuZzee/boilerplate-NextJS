@@ -9,8 +9,8 @@ import todos from './todos';
 const reducers = {
   firebase: firebaseReducer,
   firestore: firestoreReducer,
-  todos,
   toastr,
+  todos,
   next: (state = { tick: 'init' }, action) => {
     switch (action.type) {
       case HYDRATE:

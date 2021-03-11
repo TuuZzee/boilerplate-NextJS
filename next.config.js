@@ -8,13 +8,14 @@ module.exports = withSourceMaps(
   withImages({
     crossOrigin: 'anonymous',
     target: 'experimental-serverless-trace',
-    /* eslint-disable no-secrets/no-secrets */
     env: {
       ENV: process.env.ENV,
-      // API urls
-      API_HOST: process.env.API_HOST,
-      API_TIMEOUT: process.env.API_TIMEOUT ? process.env.API_TIMEOUT : 30,
+      APP_ENV: process.env.APP_ENV,
+      NEXT_TELEMETRY_DISABLED: process.env.NEXT_TELEMETRY_DISABLED,
+      // urls
       DOMAIN: process.env.DOMAIN,
+      API_HOST: process.env.API_HOST,
+      API_TIMEOUT: process.env.API_TIMEOUT,
       // AWS
       COGNITO_REGION: process.env.COGNITO_REGION,
       COGNITO_USER_POOL_ID: process.env.COGNITO_USER_POOL_ID,
@@ -26,7 +27,12 @@ module.exports = withSourceMaps(
       FIREBASE_MESSENGING_SENDER_ID: process.env.FIREBASE_MESSENGING_SENDER_ID,
       FIREBASE_MEASUREMENT_ID: process.env.FIREBASE_MEASUREMENT_ID,
     },
-    /* eslint-enable no-secrets/no-secrets */
+    images: {
+      loader: 'imgix',
+      // domains: [process.env.DOMAIN],
+      // path: [process.env.DOMAIN],
+    },
+
     // eslint-disable-next-line no-unused-vars
     webpack(config, options) {
       return config;

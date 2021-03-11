@@ -1,0 +1,4 @@
+node_modules/
+src/locale/
+src/redux/
+src/utils/

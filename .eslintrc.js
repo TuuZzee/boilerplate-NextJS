@@ -10,11 +10,9 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
-    'prettier',
-    'prettier/babel',
-    'prettier/react',
     'plugin:security/recommended',
     'plugin:lodash-fp/recommended',
+    'prettier',
   ],
   globals: {
     Atomics: 'readonly',
@@ -47,7 +45,7 @@ module.exports = {
       },
     ],
     'no-console':
-      process.env.ENV === 'production'
+      process.env.APP_ENV === 'production'
         ? ['error']
         : [
             'error',

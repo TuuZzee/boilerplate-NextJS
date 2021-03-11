@@ -1,0 +1,33 @@
+# Run Linters for code checks on every PR open (Eslint and StyleLint)
+# Might add on push later if possible base on activity
+name: Codebase Checker
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: NPM Install
+      run: |
+        npm install
+
+    - name: Validate Javascript files with Eslint
+      run: |
+        npm run jsLint
+
+    - name: Validate CSS and Styled Component code with StyleLint
+      run: |
+        npm run cssLint

@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import localforage from 'localforage';
 import moment from 'moment';
 import Router from 'next/router';
+import { isEmpty } from 'lodash/fp';
 
+import { light, supportedUIthemes } from 'src/styles/theme';
 import { getBrowserWindow, getBrowserDocument } from '../utils/browserClient';
-import { supportedLocales } from '../utils/intl-i18n';
+import { en, ko, supportedLocales } from '../utils/intl-i18n';
 
 export const UiUxContext = createContext();
 
@@ -15,21 +17,25 @@ class UiUxContextProvider extends Component {
 
     this.updateDimensions = this.updateDimensions.bind(this);
     this.updateLocale = this.updateLocale.bind(this);
+    this.updateUiTheme = this.updateUiTheme.bind(this);
 
     this.state = {
-      currentLocale: 'ko',
+      currentLocale: en,
       devicePixelRatio: 1,
       heightScreen: 1080,
       isMobile: false,
       previousUrl: '',
+      uiTheme: light,
       widthScreen: 1920,
     };
   }
 
   componentDidMount() {
+    const self = this;
+
     localforage.config({
       driver: localforage.LOCALSTORAGE,
-      name: 'Bulldax',
+      name: 'Boilerplate',
     });
 
     this.updateDimensions();
@@ -37,11 +43,23 @@ class UiUxContextProvider extends Component {
 
     Router.events.on('routeChangeStart', () => this.setState({ previousUrl: Router.asPath }));
 
-    const self = this;
-    localforage.getItem('locale').then(locale => {
-      if (supportedLocales.includes(locale)) {
-        moment.locale(locale);
-        self.setState({ currentLocale: locale });
+    const { router } = Router;
+    const { asPath } = router;
+
+    if (!isEmpty(asPath) && asPath.includes('lang=')) {
+      this.setState({ currentLocale: asPath.includes(`lang=${ko}`) ? ko : en });
+    } else {
+      localforage.getItem('locale').then(locale => {
+        if (supportedLocales.includes(locale)) {
+          moment.locale(locale);
+          self.setState({ currentLocale: locale });
+        }
+      });
+    }
+
+    localforage.getItem('uiTheme').then(uiTheme => {
+      if (supportedUIthemes.includes(uiTheme)) {
+        self.setState({ uiTheme });
       }
     });
   }
@@ -71,13 +89,28 @@ class UiUxContextProvider extends Component {
     }
   }
 
-  updateLocale(locale) {
-    const self = this;
-    if (supportedLocales.includes(locale)) {
-      moment.locale(locale);
+  async updateLocale(locale) {
+    try {
+      const self = this;
 
-      localforage.setItem('locale', locale).then(() => {
-        self.setState({ currentLocale: locale });
+      if (supportedLocales.includes(locale)) {
+        moment.locale(locale);
+
+        localforage.setItem('locale', locale).then(() => {
+          self.setState({ currentLocale: locale });
+        });
+      }
+    } catch (error) {
+      console.error('UiUxContextProvider updateLocale - error: ', error);
+    }
+  }
+
+  updateUiTheme(newTheme) {
+    const self = this;
+
+    if (supportedUIthemes.includes(newTheme)) {
+      localforage.setItem('uiTheme', newTheme).then(() => {
+        self.setState({ uiTheme: newTheme });
       });
     }
   }
@@ -90,6 +123,7 @@ class UiUxContextProvider extends Component {
           ...this.state,
           updateDimensions: this.updateDimensions,
           updateLocale: this.updateLocale,
+          updateUiTheme: this.updateUiTheme,
         }}
       >
         {children}

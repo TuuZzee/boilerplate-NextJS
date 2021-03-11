@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import NProgress from 'nprogress';
 import Router from 'next/router';
@@ -9,15 +9,15 @@ import PropTypes from 'prop-types';
 import { Provider, useStore } from 'react-redux';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
-import { ThemeProvider } from 'styled-components';
 import { ReactQueryDevtools } from 'react-query-devtools';
-import { datadogRum } from '@datadog/browser-rum';
 
 import constants from 'src/utils/constants';
 import ErrorBoundary from 'src/components/shared/ErrorBoundary';
 import firebaseApp from 'src/utils/firebaseApp';
+import ThemeHandler from 'src/components/shared/ThemeHandler';
 import UiUxContextProvider from 'src/contexts/UiUxContext';
 import wrapper from 'src/redux/store';
+import { GlobalStyles } from 'src/styles/styledComponents/globalStyled';
 
 import 'react-dates/initialize';
 import 'src/styles/index.scss';
@@ -27,8 +27,6 @@ const rrfConfig = {
   // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 };
 
-const theme = {};
-
 // Top Progress bar
 NProgress.configure();
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -36,20 +34,6 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 const App = ({ Component, pageProps }) => {
-  useEffect(() => {
-    if (process.env.ENV === 'production' || process.env.ENV === 'stewie') {
-      datadogRum.init({
-        applicationId: constants.DATADOG.APPLICATION_ID,
-        clientToken: constants.DATADOG.CLIENT_TOKEN,
-        site: 'datadoghq.com',
-        resourceSampleRate: 100,
-        sampleRate: 100,
-        trackInteractions: true,
-        [`silentMultipleInit?`]: false,
-      });
-    }
-  }, []);
-
   const store = useStore();
 
   const rrfProps = {
@@ -71,19 +55,20 @@ const App = ({ Component, pageProps }) => {
         />
       </Head>
       <Provider store={store}>
-        <ReduxToastr
-          preventDuplicates
-          position="top-right"
-          transitionIn="bounceInDown"
-          transitionOut="bounceOutUp"
-          closeOnToastrClick
-          progressBar
-        />
         <ReactReduxFirebaseProvider {...rrfProps}>
           <UiUxContextProvider>
-            <ThemeProvider theme={theme}>
+            <ThemeHandler>
+              <ReduxToastr
+                preventDuplicates
+                position="top-right"
+                transitionIn="bounceInDown"
+                transitionOut="bounceOutUp"
+                closeOnToastrClick
+                progressBar
+              />
+              <GlobalStyles />
               <Component {...pageProps} />
-            </ThemeProvider>
+            </ThemeHandler>
           </UiUxContextProvider>
         </ReactReduxFirebaseProvider>
         <ReactQueryDevtools position="bottom-left" />

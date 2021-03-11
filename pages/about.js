@@ -1,14 +1,15 @@
 import React from 'react';
 
-import Layout from '../src/components/shared/Layout';
+import wordingPage from 'src/locale/about';
 
-// pages/about.js
-function About() {
+import Layout from 'src/components/shared/Layout';
+
+const About = () => {
   return (
-    <Layout>
-      <h3 style={{ textAlign: 'center' }}>About Page!</h3>
+    <Layout wordingPage={wordingPage}>
+      <h3 style={{ textAlign: 'center' }}>About Page</h3>
     </Layout>
   );
-}
+};
 
 export default About;

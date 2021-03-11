@@ -1,23 +1,9 @@
-const homePath = '/';
-
 module.exports = {
   inner: {
-    validPaths: [homePath],
-    home: homePath,
+    landing: { path: '/' },
+    about: { path: '/about' },
   },
-  external: {
-    bulldax: process.env.BULLDAX_DOMAIN,
-  },
-  hanbitcoApi: {
-    auth: {
-      loginCheck: 'auth/login/check',
-      loginSuccess: 'auth/login/success',
-      loginFail: 'auth/login/fail',
-      logout: 'auth/logout',
-    },
-    users: {
-      userDetails: 'users',
-    },
-  },
+  external: {},
+  api: {},
   email: {},
 };

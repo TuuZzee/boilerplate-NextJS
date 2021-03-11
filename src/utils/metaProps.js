@@ -1,5 +1,5 @@
 export default {
-  title: 'Hanbitco',
+  title: 'Boilerplate App',
   description: {
     en: '',
     ko: '',

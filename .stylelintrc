@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-styled-components",
+    "stylelint-config-recommended",
+  ],
+  "syntax": "scss",
+  "rules": {
+    "at-rule-empty-line-before": ["always", { "except": ["after-same-name", "first-nested"] }],
+    "declaration-colon-newline-after": null,
+    "declaration-empty-line-before": null,
+    "function-name-case": null,
+    "indentation": null,
+    "no-eol-whitespace": null,
+    "value-keyword-case": null,
+    "value-list-comma-newline-after": null
+  }
+}

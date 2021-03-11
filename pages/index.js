@@ -1,16 +1,15 @@
-/* eslint-disable security/detect-object-injection */
-/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import { connect } from 'react-redux';
 
+import wordingPage from 'src/locale/landing';
+
 import Layout from 'src/components/shared/Layout';
-import Todo from 'src/components/Todo';
+import Landing from 'src/components/Landing';
 
 const Index = () => {
   return (
-    <Layout>
-      <h3 style={{ textAlign: 'center' }}>Landing Page</h3>
-      <Todo />
+    <Layout wordingPage={wordingPage}>
+      <Landing />
     </Layout>
   );
 };

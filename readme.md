@@ -15,37 +15,40 @@ packages pre-installed and pre-configured:
 - [Redux Thunk](https://github.com/reduxjs/redux-thunk) _Thunk middleware for Redux._
 - [Immutable](https://github.com/immutable-js/immutable-js) _Provides many Persistent Immutable data
   structures_
-- [React Query](https://github.com/tannerlinsley/react-query) _Hooks for fetching, caching and
-  updating asynchronous data in React_
 - [Axios](https://github.com/axios/axios) _Promise based HTTP client for the browser and node.js_
-- [AWS Amplify](https://github.com/aws-amplify/amplify-js) _AWS Amplify provides a declarative and
-  easy-to-use interface across different categories of cloud operations._
 - [Eslint](https://eslint.org/) _Tool for identifying and reporting on patterns found in
   ECMAScript/JavaScript code_
+- [Stylelint](https://stylelint.io/) _A mighty, modern linter that helps you avoid errors and
+  enforce conventions in your styles._
 - [Prettier](https://prettier.io/) _Prettier is an opinionated code formatter_
 - [react-redux-toastr](https://github.com/diegoddox/react-redux-toastr) _React toastr message
   implemented with Redux_
 - [reactstrap](https://reactstrap.github.io/) _Easy to use React Bootstrap 4 components_ ... And
   even more :)
+- [styled-components](https://styled-components.com/) _Visual primitives for the component age. Use
+  the best bits of ES6 and CSS to style your apps without stress_
 - [Serverless-NextJS](https://github.com/serverless-nextjs/serverless-next.js) _A zero configuration
   Next.js serverless component for AWS Lambda@Edge aiming for full feature parity._ and some others
   always usefull and cool packages such as BigNumber, Moment, Lodash/fp ... [Note]: for more details
   check the `package.json` file.
 
-This can be used as a template to create new repositories and projects. For feature/bug fixing you
-can open a PR from the project or create a Issue on the repository.
+[Notes]:
+
+- for more details check the `package.json` file.
+- pkg `react-intl` is lock to version `3.11.0` until migration to latest version can be worked on
+
+It comes with prebuild localization support (defaulted to en/ko) and dark/ligth mode support ready.
 
 ## Contents
 
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Development Workflow](#development-workflow)
-- [Tools and scripts](#tools-and-scripts)
 
 ### Requirements
 
 You need to have `npm` or `yarn` installed. Recommand using [n](https://github.com/tj/n) to manage
-node version more easely.
+node version more easely. Node version recommanded: v14.15.4
 
 ```sh
 brew install npm
@@ -92,24 +95,6 @@ npm run build
 
 [Note] This project is using `dotenv-webpack` package to manage env values. Each env has is own
 file, dev is using `.env`.
-
-### Tools and scripts
-
-The project is using `husky` and `lint-staged` with which are configure to run on git pre-commit
-hooks During this phase the code is going to be checked with Eslint and Prettier and
-auto-formated/fixed when possible.
-
-How to run Eslint (from root file):
-
-```sh
-./node_modules/.bin/eslint --fix ./
-```
-
-How to run prettier:
-
-```sh
-npm run format
-```
 
 ### License
 

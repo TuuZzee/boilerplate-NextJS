@@ -5,7 +5,7 @@ name: Serverless Deployment to Production
 # Uncomment when needed
 # on:
 #   push:
-#     branches: [ master ]
+#     branches: [ main ]
 
 jobs:
   build:
@@ -44,9 +44,3 @@ jobs:
         AWS_REGION: ${{ secrets.AWS_REGION }}
       run:
         npm run deploy
-
-    - name: Deploy SourceMaps to DataDog
-      env:
-        DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-      run:
-        npm run deploy-sourcemaps-prod

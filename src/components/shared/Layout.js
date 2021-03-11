@@ -1,45 +1,104 @@
-import React from 'react';
-import Head from 'next/head';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Alert } from 'reactstrap';
+import { IntlProvider } from 'react-intl';
+import { DefaultSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import { isEmpty, mergeAll } from 'lodash/fp';
+
+import constants from 'src/utils/constants';
+import metaProps from 'src/utils/metaProps';
+import wordingCommon from 'src/locale/common';
+import wordingErrors from 'src/locale/errorMessages';
+import { UiUxContext } from 'src/contexts/UiUxContext';
+import { en, flattenMessages } from 'src/utils/intl-i18n';
+
+import ErrorBoundary from 'src/components/shared/ErrorBoundary';
+
+import FirebaseCollectionsLoaders from 'src/components/shared/dataLoaders/firebase/Collections';
+import FirestoreCollectionsLoaders from 'src/components/shared/dataLoaders/firestore/Collections';
 
 import Nav from './Nav';
 
-const Layout = ({ title, children }) => (
-  <div>
-    <Head>
-      <title>{title}</title>
-    </Head>
-
-    <header>
-      <Nav />
-    </header>
-
-    {children}
-
-    {process.env.ENV !== 'production' ? (
-      <>
-        <Alert color="danger">{process.env.ENV}</Alert>
-        <style>{`
+const EnvironmentBadge = () => {
+  return (
+    <>
+      {process.env.APP_ENV !== 'production' ? (
+        <>
+          <Alert color="danger">{process.env.APP_ENV}</Alert>
+          <style>{`
             .alert.alert-danger {
-                position: fixed;
-                left: 10px;
-                bottom: 10px;
+              position: fixed;
+              left: 10px;
+              top: 90%;
+              padding: 5px 10px;
+              font-size: 12px;
             }
-        `}</style>
-      </>
-    ) : null}
-  </div>
-);
+          `}</style>
+        </>
+      ) : null}
+    </>
+  );
+};
+
+const Layout = ({ children, query, wordingPage }) => {
+  const router = useRouter();
+  const { currentLocale } = useContext(UiUxContext);
+
+  // note: locale setting is async in the context
+  const metaLocale = !isEmpty(query) && !isEmpty(query.lang) ? query.lang : currentLocale;
+
+  const intlMessages = flattenMessages(
+    mergeAll([wordingCommon, wordingPage, wordingErrors])[currentLocale],
+  );
+
+  return (
+    <div id="main-layout">
+      <DefaultSeo
+        title={metaProps.title}
+        keywords={metaProps.keywords[metaLocale]}
+        description={metaProps.description[metaLocale]}
+        openGraph={{
+          type: 'website',
+          url: currentLocale === en ? `${constants.DOMAIN}?lang=${en}` : constants.DOMAIN,
+          site_name: 'Boilerplate',
+          description: metaProps.description[metaLocale],
+          images: [{ url: metaProps.og.global.imageUrl[metaLocale], width: 650, height: 340 }],
+        }}
+      />
+
+      <FirebaseCollectionsLoaders route={router ? router.route : null} />
+      <FirestoreCollectionsLoaders route={router ? router.route : null} />
+      <IntlProvider
+        defaultLocale={currentLocale}
+        key={currentLocale}
+        locale={currentLocale}
+        messages={intlMessages}
+      >
+        <ErrorBoundary errorLevel={constants.ERRORS_LEVELS.layout}>
+          <header>
+            <Nav />
+          </header>
+        </ErrorBoundary>
+
+        <main id="page-wrap" aria-hidden="true">
+          {children}
+        </main>
+      </IntlProvider>
+      <EnvironmentBadge />
+    </div>
+  );
+};
 
 Layout.propTypes = {
-  title: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  query: PropTypes.shape({ lang: PropTypes.string }),
+  wordingPage: PropTypes.shape({}).isRequired,
 };
 
 Layout.defaultProps = {
-  title: 'Boilerplate App',
   children: null,
+  query: { lang: '' },
 };
 
 export default Layout;
