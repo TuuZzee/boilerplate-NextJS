@@ -1,3 +1,5 @@
 export default {
-  errorMsg: {},
+  errorMsg: {
+    default: 'The request failed. Please try it again.',
+  },
 };
