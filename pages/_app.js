@@ -7,13 +7,14 @@ import Router from 'next/router';
 import ReduxToastr from 'react-redux-toastr';
 import PropTypes from 'prop-types';
 import { Provider, useStore } from 'react-redux';
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import { createFirestoreInstance } from 'redux-firestore';
+// To enable Firebase/Firestore config needs add a valid Firebase app keys to .env.local
+// import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+// import { createFirestoreInstance } from 'redux-firestore';
 import { ReactQueryDevtools } from 'react-query-devtools';
 
 import constants from 'src/utils/constants';
 import ErrorBoundary from 'src/components/shared/ErrorBoundary';
-import firebaseApp from 'src/utils/firebaseApp';
+// import firebaseApp from 'src/utils/firebaseApp';
 import ThemeHandler from 'src/components/shared/ThemeHandler';
 import UiUxContextProvider from 'src/contexts/UiUxContext';
 import wrapper from 'src/redux/store';
@@ -22,10 +23,10 @@ import { GlobalStyles } from 'src/styles/styledComponents/globalStyled';
 import 'react-dates/initialize';
 import 'src/styles/index.scss';
 
-const rrfConfig = {
-  userProfile: null,
-  // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-};
+// const rrfConfig = {
+//   userProfile: null,
+//   // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+// };
 
 // Top Progress bar
 NProgress.configure();
@@ -36,12 +37,12 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const App = ({ Component, pageProps }) => {
   const store = useStore();
 
-  const rrfProps = {
-    firebase: firebaseApp,
-    config: rrfConfig,
-    dispatch: store.dispatch,
-    createFirestoreInstance,
-  };
+  // const rrfProps = {
+  //   firebase: firebaseApp,
+  //   config: rrfConfig,
+  //   dispatch: store.dispatch,
+  //   createFirestoreInstance,
+  // };
 
   return (
     <ErrorBoundary errorLevel={constants.ERRORS_LEVELS.application}>
@@ -55,22 +56,22 @@ const App = ({ Component, pageProps }) => {
         />
       </Head>
       <Provider store={store}>
-        <ReactReduxFirebaseProvider {...rrfProps}>
-          <UiUxContextProvider>
-            <ThemeHandler>
-              <ReduxToastr
-                preventDuplicates
-                position="top-right"
-                transitionIn="bounceInDown"
-                transitionOut="bounceOutUp"
-                closeOnToastrClick
-                progressBar
-              />
-              <GlobalStyles />
-              <Component {...pageProps} />
-            </ThemeHandler>
-          </UiUxContextProvider>
-        </ReactReduxFirebaseProvider>
+        {/* <ReactReduxFirebaseProvider {...rrfProps}> */}
+        <UiUxContextProvider>
+          <ThemeHandler>
+            <ReduxToastr
+              preventDuplicates
+              position="top-right"
+              transitionIn="bounceInDown"
+              transitionOut="bounceOutUp"
+              closeOnToastrClick
+              progressBar
+            />
+            <GlobalStyles />
+            <Component {...pageProps} />
+          </ThemeHandler>
+        </UiUxContextProvider>
+        {/* </ReactReduxFirebaseProvider> */}
         <ReactQueryDevtools position="bottom-left" />
       </Provider>
     </ErrorBoundary>

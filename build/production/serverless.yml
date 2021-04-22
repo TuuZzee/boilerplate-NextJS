@@ -2,14 +2,17 @@
 # https://github.com/danielcondemarin/serverless-next.js
 
 feBoilerplateClient:
-  component: "@sls-next/serverless-component@1.18.0"
+  component: "@sls-next/serverless-component@1.19.0-alpha.35"
   inputs:
     useServerlessTraceTarget: true
     bucketName: "boilerplate-client-production"
     description: "Boilerplate Client for Production env, NextJS Lambda@Edge for Cloudfront distribution"
     name:
-      defaultLambda: feBoilerplateClientProduction
+      defaultLambda: feBoilerplateClientDefaultProd
+      imageLambda: feBoilerplateClientImageProd
     timeout:
       defaultLambda: 30
+      imageLambda: 15
     memory:
       defaultLambda: 1024
+      imageLambda: 2048

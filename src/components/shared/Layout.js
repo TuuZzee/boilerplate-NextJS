@@ -23,9 +23,9 @@ import Nav from './Nav';
 const EnvironmentBadge = () => {
   return (
     <>
-      {process.env.APP_ENV !== 'production' ? (
+      {process.env.NEXT_PUBLIC_APP_ENV !== 'production' ? (
         <>
-          <Alert color="danger">{process.env.APP_ENV}</Alert>
+          <Alert color="danger">{process.env.NEXT_PUBLIC_APP_ENV}</Alert>
           <style>{`
             .alert.alert-danger {
               position: fixed;

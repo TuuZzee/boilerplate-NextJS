@@ -34,10 +34,7 @@ packages pre-installed and pre-configured:
 
 [Notes]:
 
-- for more details check the `package.json` file.
-- pkg `react-intl` is lock to version `3.11.0` until migration to latest version can be worked on
-
-It comes with prebuild localization support (defaulted to en/ko) and dark/ligth mode support ready.
+Comes with prebuild localization support (defaulted to en/ko) and dark/ligth mode support ready.
 
 ## Contents
 
@@ -76,26 +73,76 @@ npm install
 Start a live-reload development server:
 
 ```sh
-# With Yarn
-yarn dev
-
-# With npm
 npm run dev
 ```
 
-Generate a production build:
+Create a local env setting (using the QA settings)
 
 ```sh
-# With Yarn
-yarn build
+cp qa.env .env.local
+```
 
-# With npm
+Generate a prod build:
+
+```sh
 npm run build
 ```
 
-[Note] This project is using `dotenv-webpack` package to manage env values. Each env has is own
-file, dev is using `.env`.
+This repository is using Github Actions to deploy to proper environements. In order to deploy to QA
+you can force push to the origin `qa` branch. For production release, just merge to `main` branch.
 
-### License
+### Files/Folders structures
 
-MIT
+This project is running with NextJS so it follows the framework directives (`/pages` `/public`
+folders). For the rest all files are under `/src`.
+
+Here is the complete structure:
+
+```
+.
+├── .github/
+├── node_modules/
+├── build/                     # Build Folders for serverless config files
+│ ├── production/              # Production Env config files (serverless + .env)
+│ ├── qa/                      # QA Env config files (serverless + .env)
+├── pages/                     # Pages folder
+├── public/                    # Public assets
+│ ├── img/                     # img assets
+├── src/                       # Source files
+│ ├── components/              # React Compoments
+│ ├── context/                 # React Contexts
+│ ├── locale/                  # Locale wording
+│ ├── redux/                   # Redux stuffs (use Ducks patern)
+│ ├── styles/                  # Global styling and pkgs styling imports
+│ └── utils/                   # Constants, Pkgs clients init, tools and utils
+├── .eslintrc.js
+├── .eslintignore
+├── .firebaserc
+├── .gitignore
+├── .prettierignore
+├── .prettierrc
+├── firebase.json
+├── jsconfig.json
+├── next-config.js
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+### Tools and scripts
+
+The project is using `husky` and `lint-staged` with which are configure to run on git pre-commit
+hooks During this phase the code is going to be checked with Eslint and Prettier and
+auto-formated/fixed when possible.
+
+How to run Eslint (from root file):
+
+```sh
+./node_modules/.bin/eslint --fix ./
+```
+
+How to run prettier:
+
+```sh
+npm run format
+```

@@ -26,7 +26,16 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'react-hooks', 'prettier', 'no-secrets', 'security', 'import', 'lodash-fp'],
+  plugins: [
+    'formatjs',
+    'import',
+    'lodash-fp',
+    'no-secrets',
+    'prettier',
+    'react-hooks',
+    'react',
+    'security',
+  ],
   rules: {
     'no-nested-ternary': 'off',
     'security/detect-object-injection': 'off',
@@ -45,7 +54,7 @@ module.exports = {
       },
     ],
     'no-console':
-      process.env.APP_ENV === 'production'
+      process.env.NEXT_PUBLIC_APP_ENV === 'production'
         ? ['error']
         : [
             'error',
@@ -98,6 +107,8 @@ module.exports = {
     ],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-one-expression-per-line': 'off', // Conflicts with prettier
+    'react/jsx-curly-newline': 'off', // Conflicts with prettier
   },
   settings: {
     'import/resolver': {

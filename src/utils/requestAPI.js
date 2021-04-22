@@ -1,5 +1,4 @@
 import axios from 'axios';
-import axiosRetry from 'axios-retry';
 // eslint-disable-next-line lodash-fp/use-fp
 import _ from 'lodash';
 
@@ -20,24 +19,9 @@ const client = axios.create({
   timeout,
 });
 
-// [Note]: retryCondition needs to be overide until patch for package applied
-// -> https://github.com/softonic/axios-retry/issues/59
-// -> https://github.com/softonic/axios-retry/pull/82
-axiosRetry(client, {
-  retries: 3,
-  retryDelay: (retryCount, error) => {
-    if (process.env.APP_ENV !== 'production') {
-      console.debug('retryDelay:', new Date());
-      console.debug('Error:', error);
-    }
-
-    return retryCount * process.env.API_TIMEOUT_BULLDAX;
-  },
-});
-
 const requestBulldaxAPI = async options => {
   const onSuccess = response => {
-    if (process.env.APP_ENV !== 'production')
+    if (process.env.NEXT_PUBLIC_APP_ENV !== 'production')
       console.debug('Request API Successful response: ', response);
 
     return response.data;

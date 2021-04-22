@@ -6,8 +6,13 @@ import { createWrapper } from 'next-redux-wrapper';
 
 import reducer from './modules';
 
-const middlewares = [ReduxThunk, ReduxLogger];
-const createWithMiddleware = composeWithDevTools(applyMiddleware(...middlewares));
+// Note: disable dev-tools and logs in Production mode
+const middlewares =
+  process.env.NEXT_PUBLIC_APP_ENV === 'production' ? [ReduxThunk] : [ReduxThunk, ReduxLogger];
+const createWithMiddleware =
+  process.env.NEXT_PUBLIC_APP_ENV === 'production'
+    ? applyMiddleware(...middlewares)
+    : composeWithDevTools(applyMiddleware(...middlewares));
 
 const makeStore = initialState => {
   return createStore(reducer, initialState, createWithMiddleware);

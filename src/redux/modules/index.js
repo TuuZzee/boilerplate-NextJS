@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 import { reducer as toastr } from 'react-redux-toastr';
-import { firebaseReducer } from 'react-redux-firebase';
-import { firestoreReducer } from 'redux-firestore';
+// import { firebaseReducer } from 'react-redux-firebase';
+// import { firestoreReducer } from 'redux-firestore';
 import { HYDRATE } from 'next-redux-wrapper';
 
 import todos from './todos';
 
 const reducers = {
-  firebase: firebaseReducer,
-  firestore: firestoreReducer,
+  // firebase: firebaseReducer,
+  // firestore: firestoreReducer,
   toastr,
   todos,
   next: (state = { tick: 'init' }, action) => {
