@@ -2,7 +2,9 @@
 # Might add on push later if possible base on activity
 name: Codebase Checker
 
-on: pull_request
+on:
+  pull_request:
+    types: [ opened ] # add 'synchronize' for triggering on every push
 
 jobs:
   build:
