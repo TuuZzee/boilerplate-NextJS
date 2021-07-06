@@ -16,7 +16,9 @@ import constants from 'src/utils/constants';
 import ErrorBoundary from 'src/components/shared/ErrorBoundary';
 // import firebaseApp from 'src/utils/firebaseApp';
 import ThemeHandler from 'src/components/shared/ThemeHandler';
+import LocaleContextProvider from 'src/contexts/LocaleContext';
 import UiUxContextProvider from 'src/contexts/UiUxContext';
+import RoutingContextProvider from 'src/contexts/RoutingContext';
 import wrapper from 'src/redux/store';
 import { GlobalStyles } from 'src/styles/styledComponents/globalStyled';
 
@@ -57,22 +59,28 @@ const App = ({ Component, pageProps }) => {
       </Head>
       <Provider store={store}>
         {/* <ReactReduxFirebaseProvider {...rrfProps}> */}
-        <UiUxContextProvider>
-          <ThemeHandler>
-            <ReduxToastr
-              preventDuplicates
-              position="top-right"
-              transitionIn="bounceInDown"
-              transitionOut="bounceOutUp"
-              closeOnToastrClick
-              progressBar
-            />
-            <GlobalStyles />
-            <Component {...pageProps} />
-          </ThemeHandler>
-        </UiUxContextProvider>
+        <RoutingContextProvider>
+          <UiUxContextProvider>
+            <ThemeHandler>
+              <LocaleContextProvider>
+                <ReduxToastr
+                  preventDuplicates
+                  position="top-right"
+                  transitionIn="bounceInDown"
+                  transitionOut="bounceOutUp"
+                  closeOnToastrClick
+                  progressBar
+                />
+                <GlobalStyles />
+                <Component {...pageProps} />
+              </LocaleContextProvider>
+            </ThemeHandler>
+          </UiUxContextProvider>
+        </RoutingContextProvider>
         {/* </ReactReduxFirebaseProvider> */}
-        <ReactQueryDevtools position="bottom-left" />
+        {process.env.NEXT_PUBLIC_APP_ENV !== 'production' && (
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
+        )}
       </Provider>
     </ErrorBoundary>
   );

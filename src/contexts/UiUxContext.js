@@ -1,76 +1,25 @@
-import React, { createContext, Component } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import localforage from 'localforage';
-import moment from 'moment';
-import Router from 'next/router';
-import { isEmpty } from 'lodash/fp';
 
-import { light, supportedUIthemes } from 'src/styles/theme';
-import { getBrowserWindow, getBrowserDocument } from '../utils/browserClient';
-import { en, ko, supportedLocales } from '../utils/intl-i18n';
+import { dark, supportedUIthemes } from 'src/styles/theme';
+import { getBrowserWindow, getBrowserDocument } from 'src/utils/browserClient';
 
 export const UiUxContext = createContext();
 
-class UiUxContextProvider extends Component {
-  constructor(props) {
-    super(props);
+const uiThemeStorageId = 'uiTheme';
+const resizeEventId = 'resize';
 
-    this.updateDimensions = this.updateDimensions.bind(this);
-    this.updateLocale = this.updateLocale.bind(this);
-    this.updateUiTheme = this.updateUiTheme.bind(this);
+const UiUxContextProvider = ({ children }) => {
+  const [deviceProps, setDeviceProps] = useState({
+    devicePixelRatio: 1,
+    heightScreen: 1080,
+    isMobile: false,
+    widthScreen: 1920,
+  });
+  const [uiTheme, setUiTheme] = useState(dark);
 
-    this.state = {
-      currentLocale: en,
-      devicePixelRatio: 1,
-      heightScreen: 1080,
-      isMobile: false,
-      previousUrl: '',
-      uiTheme: light,
-      widthScreen: 1920,
-    };
-  }
-
-  componentDidMount() {
-    const self = this;
-
-    localforage.config({
-      driver: localforage.LOCALSTORAGE,
-      name: 'Boilerplate',
-    });
-
-    this.updateDimensions();
-    window.addEventListener('resize', this.updateDimensions);
-
-    Router.events.on('routeChangeStart', () => this.setState({ previousUrl: Router.asPath }));
-
-    const { router } = Router;
-    const { asPath } = router;
-
-    if (!isEmpty(asPath) && asPath.includes('lang=')) {
-      this.setState({ currentLocale: asPath.includes(`lang=${ko}`) ? ko : en });
-    } else {
-      localforage.getItem('locale').then(locale => {
-        if (supportedLocales.includes(locale)) {
-          moment.locale(locale);
-          self.setState({ currentLocale: locale });
-        }
-      });
-    }
-
-    localforage.getItem('uiTheme').then(uiTheme => {
-      if (supportedUIthemes.includes(uiTheme)) {
-        self.setState({ uiTheme });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions);
-
-    Router.events.on('routeChangeStart', () => this.setState({ previousUrl: '' }));
-  }
-
-  updateDimensions() {
+  const updateDimensions = () => {
     const w = getBrowserWindow();
     const d = getBrowserDocument();
 
@@ -80,57 +29,57 @@ class UiUxContextProvider extends Component {
       const widthScreen = body.clientWidth || documentElement.clientWidth || w.innerWidth;
       const heightScreen = body.clientHeight || documentElement.clientHeight || w.innerHeight;
 
-      this.setState({
+      setDeviceProps({
         devicePixelRatio: window.devicePixelRatio,
         isMobile: widthScreen <= 480,
         widthScreen,
         heightScreen,
       });
     }
-  }
+  };
 
-  async updateLocale(locale) {
-    try {
-      const self = this;
-
-      if (supportedLocales.includes(locale)) {
-        moment.locale(locale);
-
-        localforage.setItem('locale', locale).then(() => {
-          self.setState({ currentLocale: locale });
-        });
-      }
-    } catch (error) {
-      console.error('UiUxContextProvider updateLocale - error: ', error);
-    }
-  }
-
-  updateUiTheme(newTheme) {
-    const self = this;
-
+  const updateUiTheme = newTheme => {
     if (supportedUIthemes.includes(newTheme)) {
-      localforage.setItem('uiTheme', newTheme).then(() => {
-        self.setState({ uiTheme: newTheme });
-      });
+      setUiTheme(newTheme);
     }
-  }
+  };
 
-  render() {
-    const { children } = this.props;
-    return (
-      <UiUxContext.Provider
-        value={{
-          ...this.state,
-          updateDimensions: this.updateDimensions,
-          updateLocale: this.updateLocale,
-          updateUiTheme: this.updateUiTheme,
-        }}
-      >
-        {children}
-      </UiUxContext.Provider>
-    );
-  }
-}
+  useEffect(() => {
+    const setDefaultTheme = async () => {
+      const storageTheme = await localforage.getItem(uiThemeStorageId);
+
+      if (storageTheme !== uiTheme && supportedUIthemes.includes(storageTheme)) {
+        setUiTheme(storageTheme);
+      }
+    };
+
+    setDefaultTheme();
+    updateDimensions();
+    window.addEventListener(resizeEventId, updateDimensions);
+
+    return () => {
+      window.removeEventListener(resizeEventId, updateDimensions);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    localforage.setItem(uiThemeStorageId, uiTheme);
+  }, [uiTheme]);
+
+  return (
+    <UiUxContext.Provider
+      value={{
+        ...deviceProps,
+        uiTheme,
+        updateDimensions,
+        updateUiTheme,
+      }}
+    >
+      {children}
+    </UiUxContext.Provider>
+  );
+};
 
 UiUxContextProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),

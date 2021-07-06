@@ -1,19 +1,11 @@
 const withSourceMaps = require('@zeit/next-source-maps');
-const withImages = require('next-images');
 
-module.exports = withSourceMaps(
-  withImages({
-    crossOrigin: 'anonymous',
-    target: 'experimental-serverless-trace',
-    images: {
-      loader: 'imgix',
-      // domains: [process.env.NEXT_PUBLIC_DOMAIN],
-      // path: [process.env.NEXT_PUBLIC_DOMAIN],
-    },
+module.exports = withSourceMaps({
+  crossOrigin: 'anonymous',
+  target: 'experimental-serverless-trace',
 
-    // eslint-disable-next-line no-unused-vars
-    webpack(config, options) {
-      return config;
-    },
-  }),
-);
+  // eslint-disable-next-line no-unused-vars
+  webpack(config, options) {
+    return config;
+  },
+});

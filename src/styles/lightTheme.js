@@ -2,7 +2,7 @@ import { colors } from './theme';
 
 export default {
   colors: {
-    bckground: {
+    background: {
       body: colors.whiteHfff,
     },
     border: {},

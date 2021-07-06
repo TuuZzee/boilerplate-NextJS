@@ -32,9 +32,11 @@ packages pre-installed and pre-configured:
   always usefull and cool packages such as BigNumber, Moment, Lodash/fp ... [Note]: for more details
   check the `package.json` file.
 
-[Notes]:
+[Notes]: Comes with prebuild localization support (defaulted to en/ko) and dark/ligth mode support
+ready. Recommanded NodeJS version:
 
-Comes with prebuild localization support (defaulted to en/ko) and dark/ligth mode support ready.
+- for local dev `v14.15.4`
+- for hosting/deployment `v12.14.1`
 
 ## Contents
 
@@ -70,16 +72,16 @@ npm install
 
 ### Development Workflow
 
-Start a live-reload development server:
-
-```sh
-npm run dev
-```
-
 Create a local env setting (using the QA settings)
 
 ```sh
 cp qa.env .env.local
+```
+
+Start a live-reload development server:
+
+```sh
+npm run dev
 ```
 
 Generate a prod build:
@@ -132,17 +134,18 @@ Here is the complete structure:
 ### Tools and scripts
 
 The project is using `husky` and `lint-staged` with which are configure to run on git pre-commit
-hooks During this phase the code is going to be checked with Eslint and Prettier and
-auto-formated/fixed when possible.
+hooks. During this phase the code is going to be checked with Eslint and Prettier and
+auto-formated/fixed when possible. A Code Checker Github action is set with the same settings and
+will be executed on every Pull Request creation.
 
-How to run Eslint (from root file):
+Validate Javascript files with Eslint:
 
 ```sh
-./node_modules/.bin/eslint --fix ./
+npm run jsLint
 ```
 
-How to run prettier:
+Validate CSS and Styled Component code with StyleLint:
 
 ```sh
-npm run format
+npm run cssLint
 ```

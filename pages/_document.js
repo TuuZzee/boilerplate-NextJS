@@ -39,20 +39,13 @@ export default class MyDocument extends Document {
           {/* CSS imports */}
           <link
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
-          />
-          <link
-            rel="stylesheet"
             href="https://code.getmdl.io/1.3.0/material.deep_purple-blue.min.css"
-          />
-          {/* Scripts */}
-          <script src="https://kit.fontawesome.com/4133372eed.js" crossOrigin="anonymous" />
-          <script
-            src="https://www.datadoghq-browser-agent.com/datadog-rum.js"
-            type="text/javascript"
           />
         </Head>
         <body>
+          <a className="skip-link" href="#main">
+            Skip to main
+          </a>
           <Main />
           <NextScript />
         </body>
