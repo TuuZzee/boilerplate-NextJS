@@ -14,7 +14,6 @@ function Nav() {
           About
         </Link>
       </li>
-
       <style>{`
         nav {
           display: flex;
