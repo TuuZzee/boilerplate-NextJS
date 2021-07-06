@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import Script from 'next/script';
 import { Alert } from 'reactstrap';
 import { IntlProvider } from 'react-intl';
 import { DefaultSeo } from 'next-seo';
@@ -10,7 +11,7 @@ import constants from 'src/utils/constants';
 import metaProps from 'src/utils/metaProps';
 import wordingCommon from 'src/locale/common';
 import wordingErrors from 'src/locale/errorMessages';
-import { UiUxContext } from 'src/contexts/UiUxContext';
+import { LocaleContext } from 'src/contexts/LocaleContext';
 import { en, flattenMessages } from 'src/utils/intl-i18n';
 
 import ErrorBoundary from 'src/components/shared/ErrorBoundary';
@@ -43,7 +44,7 @@ const EnvironmentBadge = () => {
 
 const Layout = ({ children, query, wordingPage }) => {
   const router = useRouter();
-  const { currentLocale } = useContext(UiUxContext);
+  const { currentLocale } = useContext(LocaleContext);
 
   // note: locale setting is async in the context
   const metaLocale = !isEmpty(query) && !isEmpty(query.lang) ? query.lang : currentLocale;
@@ -54,6 +55,28 @@ const Layout = ({ children, query, wordingPage }) => {
 
   return (
     <div id="main-layout">
+      {/* Scripts */}
+      <Script
+        src="https://kit.fontawesome.com/4133372eed.js"
+        crossOrigin="anonymous"
+        strategy="beforeInteractive"
+      />
+      {/* Status Page and analitics */}
+      {process.env.NEXT_PUBLIC_APP_ENV === 'production' ? (
+        <>
+          {/* <Script
+            src="https://www.datadoghq-browser-agent.com/datadog-rum.js"
+            type="text/javascript"
+            strategy="beforeInteractive"
+          />
+          <Script
+            src="https://{code}.statuspage.io/embed/script.js"
+            strategy="beforeInteractive"
+          /> */}
+        </>
+      ) : null}
+
+      {/* SEO */}
       <DefaultSeo
         title={metaProps.title}
         keywords={metaProps.keywords[metaLocale]}

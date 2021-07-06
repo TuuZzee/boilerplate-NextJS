@@ -12,6 +12,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:security/recommended',
     'plugin:lodash-fp/recommended',
+    'plugin:@next/next/recommended',
     'prettier',
   ],
   globals: {
@@ -26,16 +27,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    'formatjs',
-    'import',
-    'lodash-fp',
-    'no-secrets',
-    'prettier',
-    'react-hooks',
-    'react',
-    'security',
-  ],
+  plugins: ['import', 'lodash-fp', 'no-secrets', 'prettier', 'react-hooks', 'react', 'security'],
   rules: {
     'no-nested-ternary': 'off',
     'security/detect-object-injection': 'off',

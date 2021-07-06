@@ -12,6 +12,13 @@ export const getBrowserDocument = () => {
   return null;
 };
 
+export const getNavigator = () => {
+  if (typeof navigator !== 'undefined') {
+    return navigator;
+  }
+  return '';
+};
+
 export const getBrowserUserAgent = () => {
   if (typeof navigator !== 'undefined') {
     return navigator.userAgent;

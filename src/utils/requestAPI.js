@@ -19,7 +19,7 @@ const client = axios.create({
   timeout,
 });
 
-const requestBulldaxAPI = async options => {
+const requestAPI = async options => {
   const onSuccess = response => {
     if (process.env.NEXT_PUBLIC_APP_ENV !== 'production')
       console.debug('Request API Successful response: ', response);
@@ -67,4 +67,4 @@ const requestBulldaxAPI = async options => {
   }
 };
 
-export default requestBulldaxAPI;
+export default requestAPI;

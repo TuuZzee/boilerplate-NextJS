@@ -5,33 +5,26 @@ function Nav() {
   return (
     <nav>
       <li>
-        <Link href="/">
-          <a id="nav-link-home" href="/">
-            <span className="icon ion-md-home mr-1" name="home">
-              {' '}
-              Home
-            </span>
-          </a>
+        <Link id="nav-link-home" href="/" passHref>
+          Home
         </Link>
       </li>
       <li>
-        <Link href="/about" as="/about">
-          <a id="nav-link-about" href="/about">
-            About
-          </a>
+        <Link id="nav-link-about" href="/about" passHref>
+          About
         </Link>
       </li>
 
       <style>{`
-				nav {
-					display: flex;
-					margin: 10px;
-				}
-				li {
-					list-style: none;
-					margin-right: 1rem;
-				}
-			`}</style>
+        nav {
+          display: flex;
+          margin: 10px;
+        }
+        li {
+          list-style: none;
+          margin-right: 1rem;
+        }
+      `}</style>
     </nav>
   );
 }
