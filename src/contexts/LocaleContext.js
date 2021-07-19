@@ -10,7 +10,7 @@ import { en, ko, supportedLocales } from 'src/utils/intl-i18n';
 
 export const LocaleContext = createContext();
 
-const localeStorageId = 'locale';
+export const localeStorageId = 'locale';
 
 const LocaleContextProvider = ({ children }) => {
   const [currentLocale, setCurrentLocale] = useState(en);
