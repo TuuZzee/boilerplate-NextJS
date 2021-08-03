@@ -11,7 +11,7 @@ const Landing = () => {
 
   return (
     <LandingWrapper>
-      <LandingTitle style={{ textAlign: 'center' }}>{intl.messages['landing.title']}</LandingTitle>
+      <LandingTitle>{intl.messages['landing.title']}</LandingTitle>
       <Todo />
     </LandingWrapper>
   );
