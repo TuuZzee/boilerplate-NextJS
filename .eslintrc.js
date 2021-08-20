@@ -1,8 +1,5 @@
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-  },
+  env: { browser: true, es6: true },
   extends: [
     'airbnb',
     'eslint:recommended',
@@ -15,15 +12,10 @@ module.exports = {
     'plugin:@next/next/recommended',
     'prettier',
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
+  globals: { Atomics: 'readonly', SharedArrayBuffer: 'readonly' },
   parser: 'babel-eslint',
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
+    ecmaFeatures: { jsx: true },
     ecmaVersion: 2018,
     sourceType: 'module',
   },
@@ -31,12 +23,7 @@ module.exports = {
   rules: {
     'no-nested-ternary': 'off',
     'security/detect-object-injection': 'off',
-    'default-case': [
-      'error',
-      {
-        commentPattern: '^skip\\sdefault',
-      },
-    ],
+    'default-case': ['error', { commentPattern: '^skip\\sdefault' }],
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
@@ -47,13 +34,8 @@ module.exports = {
     ],
     'no-console':
       process.env.NEXT_PUBLIC_APP_ENV === 'production'
-        ? ['error']
-        : [
-            'error',
-            {
-              allow: ['debug', 'warn', 'error'],
-            },
-          ],
+        ? ['error', { allow: ['warn', 'error'] }]
+        : ['error', { allow: ['debug', 'warn', 'error'] }],
     'no-param-reassign': [
       'error',
       {
@@ -62,12 +44,7 @@ module.exports = {
       },
     ],
     'no-secrets/no-secrets': 'error',
-    'no-underscore-dangle': [
-      'error',
-      {
-        allow: ['__REDUX_DEVTOOLS_EXTENSION__'],
-      },
-    ],
+    'no-underscore-dangle': ['error', { allow: ['__REDUX_DEVTOOLS_EXTENSION__'] }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'prettier/prettier': [
       'error',
@@ -91,22 +68,13 @@ module.exports = {
         vueIndentScriptAndStyle: false,
       },
     ],
-    'react/jsx-filename-extension': [
-      1,
-      {
-        extensions: ['.js', '.jsx'],
-      },
-    ],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-one-expression-per-line': 'off', // Conflicts with prettier
     'react/jsx-curly-newline': 'off', // Conflicts with prettier
   },
   settings: {
-    'import/resolver': {
-      node: {
-        paths: ['.'],
-      },
-    },
+    'import/resolver': { node: { paths: ['.'] } },
   },
 };
