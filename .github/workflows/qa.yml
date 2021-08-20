@@ -4,11 +4,11 @@ on:
   push:
     branches: [ qa ]
 
-# Uncomment when needed
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
+# Uncomment when needed
 #     steps:
 #     - uses: actions/checkout@v2
 #     - name: Use NodeJS v12.14.1
