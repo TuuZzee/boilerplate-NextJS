@@ -8,14 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-# Uncomment when needed
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Use NodeJS v12.14.1
-#       uses: actions/setup-node@v2
-#       with:
-#         node-version: '12.14.1'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use NodeJS v12.14.1
+      uses: actions/setup-node@v2
+      with:
+        node-version: '12.14.1'
 
+# Uncomment when needed
 #     - name: Cache npm Dependencies
 #       uses: actions/cache@v2
 #       id: cache_npm
