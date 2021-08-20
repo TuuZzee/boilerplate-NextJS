@@ -1,55 +1,53 @@
-# Basic build, currently only push all files to S3 bucket
-# Next step for full deployment including Cloudfront -> https://gist.github.com/rbalicki2/30e8ee5fb5bc2018923a06c5ea5e3ea5
 name: Serverless Deployment to Production
 
+on:
+  push:
+    branches: [ main ]
+
 # Uncomment when needed
-# on:
-#   push:
-#     branches: [ main ]
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Use NodeJS v12.14.1
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: '12.14.1'
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use NodeJS v12.14.1
-      uses: actions/setup-node@v2
-      with:
-        node-version: '12.14.1'
+#     - name: Cache npm Dependencies
+#       uses: actions/cache@v2
+#       id: cache_npm
+#       with:
+#         path: ~/.npm
+#         key: ${{ runner.os }}-cache_npm-${{ hashFiles('**/package-lock.json') }}
+#         restore-keys: |
+#           ${{ runner.os }}-build-
+#     - name: Cache Node Modules
+#       uses: actions/cache@v2
+#       id: cache_node_modules
+#       with:
+#         path: node_modules
+#         key: ${{ runner.os }}-cache_node_modules-${{ hashFiles('**/package-lock.json') }}
+#     - name: Install dependencies # https://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable
+#       run: |
+#         npm ci
+#       if: steps.cache_node_modules.outputs.cache-hit != 'true' # skip this step if cacher restored
 
-    - name: Cache npm Dependencies
-      uses: actions/cache@v2
-      id: cache_npm
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-cache_npm-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-
-    - name: Cache Node Modules
-      uses: actions/cache@v2
-      id: cache_node_modules
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-cache_node_modules-${{ hashFiles('**/package-lock.json') }}
-    - name: Install dependencies # https://blog.npmjs.org/post/171556855892/introducing-npm-ci-for-faster-more-reliable
-      run: |
-        npm ci
-      if: steps.cache_node_modules.outputs.cache-hit != 'true' # skip this step if cacher restored
+#     - name: Get the .env.local from the Production build folder
+#       run: |
+#         mv ./build/production/production.env .env.local
+#     - name: Get the serverless.yml from the Production build folder
+#       run: |
+#         mv ./build/production/serverless.yml serverless.yml
+#     - name: Get the .serverless from the Production build folder
+#       run: |
+#         mv ./build/production/.serverless .serverless
 
-    - name: Get the .env.local from the Production build folder
-      run: |
-        mv ./build/production/production.env .env.local
-    - name: Get the serverless.yml from the Production build folder
-      run: |
-        mv ./build/production/serverless.yml serverless.yml
-    - name: Get the .serverless from the Production build folder
-      run: |
-        mv ./build/production/.serverless .serverless
-
-    - name: Deploy to Production
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PRODUCTION_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PRODUCTION_SECRET_ACCESS_KEY }}
-      run:
-        npm run deploy
+#     - name: Deploy to Production
+#       env:
+#         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PRODUCTION_ACCESS_KEY_ID }}
+#         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PRODUCTION_SECRET_ACCESS_KEY }}
+#       run:
+#         npm run deploy
