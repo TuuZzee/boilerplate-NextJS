@@ -22,7 +22,10 @@ import RoutingContextProvider from 'src/contexts/RoutingContext';
 import wrapper from 'src/redux/store';
 import { GlobalStyles } from 'src/styles/styledComponents/globalStyled';
 
-import 'react-dates/initialize';
+// [Note]: extra configuration might be needed if
+//         some components aren't working properly for React Suite
+// -> https://rsuitejs.com/guide/use-next-app/
+import 'rsuite/dist/styles/rsuite-default.css';
 import 'src/styles/index.scss';
 
 // const rrfConfig = {

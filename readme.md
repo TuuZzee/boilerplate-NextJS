@@ -23,8 +23,8 @@ packages pre-installed and pre-configured:
 - [Prettier](https://prettier.io/) _Prettier is an opinionated code formatter_
 - [react-redux-toastr](https://github.com/diegoddox/react-redux-toastr) _React toastr message
   implemented with Redux_
-- [reactstrap](https://reactstrap.github.io/) _Easy to use React Bootstrap 4 components_ ... And
-  even more :)
+- [RSuite](https://rsuitejs.com/) _A suite of React components, sensible UI design, and a friendly
+  development experience._
 - [styled-components](https://styled-components.com/) _Visual primitives for the component age. Use
   the best bits of ES6 and CSS to style your apps without stress_
 - [Serverless-NextJS](https://github.com/serverless-nextjs/serverless-next.js) _A zero configuration
@@ -63,9 +63,6 @@ For deployment you will need a AWS account.
 First clone the repository, then install the dependencies:
 
 ```sh
-# With Yarn
-yarn install
-
 # With npm
 npm install
 ```

@@ -1,18 +1,14 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Button, List } from 'rsuite';
 
 const TodoItem = ({ todo, remove }) => (
-  <li style={{ listStyle: 'none' }}>
-    <button
-      type="button"
-      className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-js-ripple-effect"
-      onClick={() => remove(todo)}
-      style={{ fontSize: 12 }}
-    >
-      x
-    </button>{' '}
+  <List.Item style={{ listStyle: 'none' }}>
     {todo.text}
-  </li>
+    <Button type="button" onClick={() => remove(todo)}>
+      x
+    </Button>
+  </List.Item>
 );
 
 TodoItem.propTypes = {
