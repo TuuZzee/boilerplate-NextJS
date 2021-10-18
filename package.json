@@ -84,7 +84,7 @@
     "eslint-plugin-no-secrets": "^0.8.9",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-react-hooks": "^4.2.1-alpha-930c9e7ee-20211015",
     "eslint-plugin-security": "^1.4.0",
     "husky": "^7.0.2",
     "lint-staged": "^11.2.3",
