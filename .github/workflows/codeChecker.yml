@@ -4,7 +4,7 @@ name: Codebase Checker
 
 on:
   pull_request:
-    types: [ opened ] # add 'synchronize' for triggering on every push
+    types: [ opened, synchronize ]
 
 jobs:
   build:
