@@ -13,7 +13,7 @@ module.exports = {
     'prettier',
   ],
   globals: { Atomics: 'readonly', SharedArrayBuffer: 'readonly' },
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaFeatures: { jsx: true },
     ecmaVersion: 2018,
@@ -54,7 +54,7 @@ module.exports = {
         endOfLine: 'lf',
         htmlWhitespaceSensitivity: 'css',
         insertPragma: false,
-        jsxBracketSameLine: false,
+        bracketSameLine: false,
         jsxSingleQuote: false,
         printWidth: 100,
         proseWrap: 'always',

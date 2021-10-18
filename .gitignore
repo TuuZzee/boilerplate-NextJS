@@ -5,6 +5,9 @@
 ### VSCode ###
 .vscode/
 
+### Code analysis tool DeepCode/Snyk ###
+.dccache
+
 ### dotenv ###
 .env
 .env.local

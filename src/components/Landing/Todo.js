@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/label-has-for */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Button,
@@ -38,7 +36,7 @@ const Todo = ({ todos, addTodo, removeTodo }) => {
     <div>
       <Divider />
       <FlexboxGrid justify="center">
-        <FlexboxGrid.Item colspan={6}>
+        <FlexboxGrid.Item colSpan={6}>
           <Form onSubmit={handleAddTodo}>
             <FormGroup>
               <ControlLabel>Add ToDo:</ControlLabel>
