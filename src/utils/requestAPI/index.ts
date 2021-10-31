@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axiosRetry from 'axios-retry';
 import localforage from 'localforage';
 import { cloneDeep } from 'lodash/fp';
@@ -7,33 +7,39 @@ import { toastr } from 'react-redux-toastr';
 import localeErrorMsg from 'src/locale/errorMessages';
 import { localeStorageId } from 'src/contexts/LocaleContext';
 
-import constants from './constants';
-import Emitter from './emitter';
-import { flattenMessages } from './intl-i18n';
+import constants from '../constants';
+import Emitter from '../emitter';
+import { flattenMessages } from '../intl-i18n';
+import {
+  ClientTokenType,
+  CustomAxiosReqConfigTypes,
+  CustomInstance,
+  CustomResponse,
+} from './requestAPITypes';
 
 export const authenticationFailed = 'authentication_fail';
 export const clientTokenStorageId = 'clientTokens';
 
-const isNotProduction = process.env.NEXT_PUBLIC_APP_ENV !== 'production';
+const isNotProduction: boolean = process.env.NEXT_PUBLIC_APP_ENV !== 'production';
 
 const { API } = constants;
 const timeout = parseInt(constants.API.timeout, 10);
 
-const setClientTokenData = async tokens => {
+const setClientTokenData = async (tokens: ClientTokenType) => {
   await localforage.setItem(clientTokenStorageId, JSON.stringify({ ...tokens }));
 };
 
-const getClientTokens = async () => {
-  const localStorageTokens = await localforage.getItem(clientTokenStorageId);
+const getClientTokens: () => Promise<ClientTokenType> = async () => {
+  const localStorageTokens: string = await localforage.getItem(clientTokenStorageId);
 
   return JSON.parse(localStorageTokens);
 };
 
-const clearSession = async () => {
+const clearSession: () => Promise<void> = async () => {
   await localforage.removeItem(clientTokenStorageId);
 };
 
-const requestAPI = axios.create({
+const requestAPI: CustomInstance = axios.create({
   baseURL: `${API.host}/`,
   headers: { 'Content-Type': 'application/json' },
   timeout,
@@ -43,7 +49,7 @@ axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
 
 // Request interceptor
 requestAPI.interceptors.request.use(
-  async config => {
+  async (config: CustomAxiosReqConfigTypes) => {
     try {
       if (isNotProduction) {
         console.debug('requestAPI - interceptors.req sent config: ', config);
@@ -72,14 +78,13 @@ requestAPI.interceptors.request.use(
 
 // Response interceptor
 requestAPI.interceptors.response.use(
-  async res => {
+  async (res: CustomResponse<any>) => {
     try {
       if (isNotProduction) {
         console.debug('requestAPI - interceptors.res sent res: ', res);
       }
 
       const { config, data } = res;
-
       // Example of implementation for handling access tokens in various processes:
       // Sign-In / Refresh credentials
       if (['/sign-in', '/refresh'].includes(config.url)) {
@@ -94,9 +99,9 @@ requestAPI.interceptors.response.use(
 
       // Toastr message handing
       if (config && !!config.toastrSuccessContent) {
-        toastr.success(config.toastrSuccessContent);
+        toastr.success('', config.toastrSuccessContent);
       } else if (config && !!config.toastrInfoContent) {
-        toastr.success(config.toastrInfoContent);
+        toastr.success('', config.toastrInfoContent);
       }
     } catch (error) {
       console.error(`requestAPI - interceptors.res res: ${res} - error: ${error}`);
@@ -120,7 +125,7 @@ requestAPI.interceptors.response.use(
         const { code } = data;
 
         if (code && code === authenticationFailed) {
-          Emitter.emit(authenticationFailed);
+          Emitter.emit(authenticationFailed, null);
           clearSession();
         } else if (code && errorMsgList[`errorMsg.${code}`]) {
           errorMsg = errorMsgList[`errorMsg.${code}`];
@@ -129,7 +134,7 @@ requestAPI.interceptors.response.use(
 
       // Toastr message handing
       if (config && config.useToastrError && errorMsg) {
-        toastr.error(errorMsg);
+        toastr.error('', errorMsg);
       }
     } catch (e) {
       console.error(`requestAPI - interceptors.res error: ${error} - e: ${e}`);

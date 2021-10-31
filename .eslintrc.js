@@ -16,10 +16,20 @@ module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: { jsx: true },
+    project: './tsconfig.json',
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['import', 'lodash-fp', 'no-secrets', 'prettier', 'react-hooks', 'react', 'security'],
+  plugins: [
+    'import',
+    'lodash-fp',
+    'no-secrets',
+    'prettier',
+    'react-hooks',
+    'react',
+    'security',
+    '@typescript-eslint',
+  ],
   rules: {
     'no-nested-ternary': 'off',
     'security/detect-object-injection': 'off',
@@ -68,13 +78,13 @@ module.exports = {
         vueIndentScriptAndStyle: false,
       },
     ],
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-one-expression-per-line': 'off', // Conflicts with prettier
     'react/jsx-curly-newline': 'off', // Conflicts with prettier
   },
   settings: {
-    'import/resolver': { node: { paths: ['.'] } },
+    'import/resolver': { node: { paths: ['.'] }, typescript: {} },
   },
 };

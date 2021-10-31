@@ -8,3 +8,4 @@ out/
 *.serverless/**
 package-lock.json
 
+src/types/**

@@ -13,6 +13,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types", "./src/types/"],
     "paths": {
       "@/reduxModules/*": ["src/redux/modules/*"],
       "@/customContext/*": ["src/contexts/*"],
