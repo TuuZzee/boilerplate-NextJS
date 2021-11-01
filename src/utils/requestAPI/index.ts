@@ -19,7 +19,6 @@ import {
 
 export const authenticationFailed = 'authentication_fail';
 export const clientTokenStorageId = 'clientTokens';
-
 const isNotProduction: boolean = process.env.NEXT_PUBLIC_APP_ENV !== 'production';
 
 const { API } = constants;
@@ -125,7 +124,7 @@ requestAPI.interceptors.response.use(
         const { code } = data;
 
         if (code && code === authenticationFailed) {
-          Emitter.emit(authenticationFailed, null);
+          Emitter.emit(authenticationFailed, '');
           clearSession();
         } else if (code && errorMsgList[`errorMsg.${code}`]) {
           errorMsg = errorMsgList[`errorMsg.${code}`];
@@ -134,7 +133,7 @@ requestAPI.interceptors.response.use(
 
       // Toastr message handing
       if (config && config.useToastrError && errorMsg) {
-        toastr.error('', errorMsg);
+        toastr.error(errorMsg, '');
       }
     } catch (e) {
       console.error(`requestAPI - interceptors.res error: ${error} - e: ${e}`);

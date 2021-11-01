@@ -10,13 +10,13 @@ module.exports = {
     'plugin:security/recommended',
     'plugin:lodash-fp/recommended',
     'plugin:@next/next/recommended',
+    'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
   globals: { Atomics: 'readonly', SharedArrayBuffer: 'readonly' },
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: { jsx: true },
-    project: './tsconfig.json',
     ecmaVersion: 2018,
     sourceType: 'module',
   },
@@ -85,6 +85,9 @@ module.exports = {
     'react/jsx-curly-newline': 'off', // Conflicts with prettier
   },
   settings: {
-    'import/resolver': { node: { paths: ['.'] }, typescript: {} },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx', '.js'],
+    },
+    'import/resolver': { node: { paths: ['.'] }, typescript: './tsconfig.json' },
   },
 };
