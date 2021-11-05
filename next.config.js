@@ -1,6 +1,4 @@
-const withSourceMaps = require('@zeit/next-source-maps');
-
-module.exports = withSourceMaps({
+module.exports = {
   crossOrigin: 'anonymous',
-  target: 'experimental-serverless-trace',
-});
+  // productionBrowserSourceMaps: true, // Uncomment if sourcemap is needed for monitoring/observability
+};

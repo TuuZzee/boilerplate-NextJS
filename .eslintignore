@@ -7,4 +7,4 @@ out/
 .serverless_nextjs/**
 *.serverless/**
 package-lock.json
-
+yarn.lock
