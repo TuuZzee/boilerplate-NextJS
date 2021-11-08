@@ -10,7 +10,8 @@ import { Provider, useStore } from 'react-redux';
 // To enable Firebase/Firestore config needs add a valid Firebase app keys to .env.local
 // import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 // import { createFirestoreInstance } from 'redux-firestore';
-import { ReactQueryDevtools } from 'react-query-devtools';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import constants from 'src/utils/constants';
 import ErrorBoundary from 'src/components/shared/ErrorBoundary';
@@ -27,6 +28,8 @@ import { GlobalStyles } from 'src/styles/styledComponents/globalStyled';
 // -> https://rsuitejs.com/guide/use-next-app/
 import 'rsuite/dist/styles/rsuite-default.css';
 import 'src/styles/index.scss';
+
+const queryClient = new QueryClient();
 
 // const rrfConfig = {
 //   userProfile: null,
@@ -62,28 +65,29 @@ const App = ({ Component, pageProps }) => {
       </Head>
       <Provider store={store}>
         {/* <ReactReduxFirebaseProvider {...rrfProps}> */}
-        <RoutingContextProvider>
-          <UiUxContextProvider>
-            <ThemeHandler>
-              <LocaleContextProvider>
-                <ReduxToastr
-                  preventDuplicates
-                  position="top-right"
-                  transitionIn="bounceInDown"
-                  transitionOut="bounceOutUp"
-                  closeOnToastrClick
-                  progressBar
-                />
-                <GlobalStyles />
-                <Component {...pageProps} />
-              </LocaleContextProvider>
-            </ThemeHandler>
-          </UiUxContextProvider>
-        </RoutingContextProvider>
-        {/* </ReactReduxFirebaseProvider> */}
-        {process.env.NEXT_PUBLIC_APP_ENV !== 'production' && (
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
-        )}
+        <QueryClientProvider client={queryClient}>
+          <RoutingContextProvider>
+            <UiUxContextProvider>
+              <ThemeHandler>
+                <LocaleContextProvider>
+                  <ReduxToastr
+                    preventDuplicates
+                    position="top-right"
+                    transitionIn="bounceInDown"
+                    transitionOut="bounceOutUp"
+                    closeOnToastrClick
+                    progressBar
+                  />
+                  <GlobalStyles />
+                  <Component {...pageProps} />
+                </LocaleContextProvider>
+              </ThemeHandler>
+            </UiUxContextProvider>
+          </RoutingContextProvider>
+          {process.env.NEXT_PUBLIC_APP_ENV !== 'production' && (
+            <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
+          )}
+        </QueryClientProvider>
       </Provider>
     </ErrorBoundary>
   );
