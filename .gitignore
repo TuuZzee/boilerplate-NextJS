@@ -13,8 +13,7 @@
 .env.local
 
 ### Firebase ###
-.idea
-**/node_modules/*
+.idode_modules/*
 **/.firebaserc
 
 ### Firebase Patch ###
@@ -22,6 +21,7 @@
 .firebase/
 
 ### Node ###
+node_modules/
 # Logs
 logs
 *.log
@@ -61,8 +61,7 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directories
-node_modules/
+ode_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -135,12 +134,9 @@ temp/
 **/*.backup.*
 **/*.back.*
 
-node_modules
-
 *.sublime*
 
 *-error.log
-yarn.lock
 psd
 thumb
 sketch

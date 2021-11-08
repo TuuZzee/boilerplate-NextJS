@@ -35,8 +35,15 @@ packages pre-installed and pre-configured:
 [Notes]: Comes with prebuild localization support (defaulted to en/ko) and dark/ligth mode support
 ready. Recommanded NodeJS version:
 
-- for local dev `v14.15.4`
-- for hosting/deployment `v12.14.1`
+[Note2]: Some packages are locked in specific version until fix is available:
+
+```
+"rsuite": "^4.10.2", # breaking changes in version ^5.1.0 for SSR
+
+"stylelint": "^13.13.1", # breaking change on v14 for JS file scanning.
+"stylelint-config-recommended": "^5.0.0",
+"stylelint-config-standard": "^22.0.0",
+```
 
 ## Contents
 
@@ -46,15 +53,19 @@ ready. Recommanded NodeJS version:
 
 ### Requirements
 
-You need to have `npm` or `yarn` installed. Recommand using [n](https://github.com/tj/n) to manage
-node version more easely. Node version recommanded: v14.15.4
+You need to have `yarn` installed. Recommand using [n](https://github.com/tj/n) to manage node
+version more easely. Node version recommanded: v14.17.6
 
 ```sh
+# Install npm
 brew install npm
+# Install yarn
+npm install --global yarn
+# Install n
+npm install -g n
+# Install node version v14.17.6
+n 14.17.6
 ```
-
-For deployment you will need a AWS account.
-[Serverless-NextJS](https://github.com/serverless-nextjs/serverless-next.js) is used for CI/CD.
 
 ### Installation
 
@@ -63,8 +74,7 @@ For deployment you will need a AWS account.
 First clone the repository, then install the dependencies:
 
 ```sh
-# With npm
-npm install
+yarn install
 ```
 
 ### Development Workflow
@@ -78,13 +88,13 @@ cp qa.env .env.local
 Start a live-reload development server:
 
 ```sh
-npm run dev
+yarn dev
 ```
 
 Generate a prod build:
 
 ```sh
-npm run build
+yarn build
 ```
 
 This repository is using Github Actions to deploy to proper environements. In order to deploy to QA
@@ -99,9 +109,9 @@ Here is the complete structure:
 
 ```
 .
-├── .github/
-├── node_modules/
-├── build/                     # Build Folders for serverless config files
+├── .github/                   # Workflow files (Github Actions)
+├── husky/                     # Husky config and scripts (pre-commits hook)
+├── build/                     # Build Folders for config files
 │ ├── production/              # Production Env config files (serverless + .env)
 │ ├── qa/                      # QA Env config files (serverless + .env)
 ├── pages/                     # Pages folder
@@ -111,20 +121,24 @@ Here is the complete structure:
 │ ├── components/              # React Compoments
 │ ├── context/                 # React Contexts
 │ ├── locale/                  # Locale wording
-│ ├── redux/                   # Redux stuffs (use Ducks patern)
+│ ├── redux/                   # Redux modules (use Ducks patern)
 │ ├── styles/                  # Global styling and pkgs styling imports
-│ └── utils/                   # Constants, Pkgs clients init, tools and utils
-├── .eslintrc.js
-├── .eslintignore
-├── .firebaserc
-├── .gitignore
-├── .prettierignore
-├── .prettierrc
-├── firebase.json
-├── jsconfig.json
+│ └── utils/                   # Constants, Pkgs init, tools and utils
+├── .babelrc
+├── .codeclimate.yml
+├──.editorconfig
+├──.eslintignore
+├──.eslintrc.js
+├──.gitignore
+├──.lintstagedrc.json
+├──.prettierignore
+├──.prettierrc
+├──.snyk
+├──.stylelintignore
+├──.stylelintrc
 ├── next-config.js
 ├── package.json
-├── package-lock.json
+├── yarn.lock
 └── README.md
 ```
 
@@ -138,11 +152,11 @@ will be executed on every Pull Request creation.
 Validate Javascript files with Eslint:
 
 ```sh
-npm run jsLint
+yarn jsLint
 ```
 
 Validate CSS and Styled Component code with StyleLint:
 
 ```sh
-npm run cssLint
+yarn cssLint
 ```
