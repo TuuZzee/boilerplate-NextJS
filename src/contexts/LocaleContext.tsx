@@ -8,7 +8,12 @@ import { isEmpty } from 'lodash/fp';
 import { getNavigator } from 'src/utils/browserClient';
 import { en, ko, supportedLocales } from 'src/utils/intl-i18n';
 
-export const LocaleContext = createContext();
+type State = {
+  currentLocale: string;
+  updateLocale: (locale: any) => Promise<void>;
+};
+
+export const LocaleContext = createContext<State | null>(null);
 
 export const localeStorageId = 'locale';
 
@@ -29,7 +34,7 @@ const LocaleContextProvider = ({ children }) => {
 
   useEffect(() => {
     const setDefaultLocale = async () => {
-      let locale = en;
+      let locale: string = en;
       const { router } = Router;
       const { asPath } = router;
 
@@ -38,10 +43,11 @@ const LocaleContextProvider = ({ children }) => {
           locale = asPath.includes(`lang=${ko}`) ? ko : en;
         } else {
           const navigator = getNavigator();
-          const navLanguage = navigator.language || navigator.userLanguage;
+
+          const navLanguage = navigator !== '' ? navigator.language || navigator.userLanguage : '';
           const navLocale = navLanguage.slice(0, navLanguage.indexOf('-'));
 
-          const storageLocale = await localforage.getItem(localeStorageId);
+          const storageLocale: string = await localforage.getItem(localeStorageId);
 
           if (storageLocale) {
             locale = storageLocale;

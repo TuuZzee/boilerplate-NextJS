@@ -11,10 +11,14 @@ export const getBrowserDocument = () => {
   }
   return null;
 };
+interface CustomNavigatorTypes extends Navigator {
+  userLanguage?: string;
+}
 
 export const getNavigator = () => {
   if (typeof navigator !== 'undefined') {
-    return navigator;
+    const customNavigator: CustomNavigatorTypes = navigator;
+    return customNavigator;
   }
   return '';
 };

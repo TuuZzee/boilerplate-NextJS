@@ -5,7 +5,16 @@ import localforage from 'localforage';
 import { dark, supportedUIthemes } from 'src/styles/theme';
 import { getBrowserWindow, getBrowserDocument } from 'src/utils/browserClient';
 
-export const UiUxContext = createContext();
+type State = {
+  devicePixelRatio: number;
+  heightScreen: number;
+  isMobile: boolean;
+  widthScreen: number;
+  uiTheme: string;
+  updateDimensions: () => void;
+  updateUiTheme: (newTheme) => void;
+};
+export const UiUxContext = createContext<State | null>(null);
 
 const uiThemeStorageId = 'uiTheme';
 const resizeEventId = 'resize';
@@ -46,7 +55,7 @@ const UiUxContextProvider = ({ children }) => {
 
   useEffect(() => {
     const setDefaultTheme = async () => {
-      const storageTheme = await localforage.getItem(uiThemeStorageId);
+      const storageTheme: string = await localforage.getItem(uiThemeStorageId);
 
       if (storageTheme !== uiTheme && supportedUIthemes.includes(storageTheme)) {
         setUiTheme(storageTheme);

@@ -2,7 +2,10 @@ import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 
-export const RoutingContext = createContext();
+type State = {
+  previousUrl: string;
+};
+export const RoutingContext = createContext<State | null>(null);
 
 const routeChangeStartEventId = 'routeChangeStart';
 
