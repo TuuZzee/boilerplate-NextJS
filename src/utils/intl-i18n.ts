@@ -8,6 +8,10 @@ export const en = 'en';
 export const ko = 'ko';
 export const supportedLocales = [en, ko];
 
+interface CustomWindow extends Window {
+  language?: string;
+}
+
 export const flattenMessages = (nestedMessages, prefix = '') => {
   return Object.keys(nestedMessages).reduce((messages, key) => {
     const value = nestedMessages[key];
@@ -29,8 +33,9 @@ export const getClientLocale = async () => {
   if (typeof window !== 'undefined') {
     locale = await localforage.getItem('locale');
 
+    const w: CustomWindow & typeof globalThis = window;
     if (supportedLocales.includes(locale)) return locale;
-    return window.language ? window.language : ko;
+    return w.language ? w.language : ko;
   }
   return locale;
 };

@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import localforage from 'localforage';
 import { cloneDeep } from 'lodash/fp';

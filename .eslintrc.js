@@ -1,22 +1,25 @@
 module.exports = {
-  env: { browser: true, es6: true },
+  env: { browser: true, es6: true, node: true },
   extends: [
-    'airbnb',
+    'airbnb-typescript',
     'eslint:recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
     'plugin:security/recommended',
+    'plugin:jsx-a11y/recommended',
     'plugin:lodash-fp/recommended',
     'plugin:@next/next/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
   globals: { Atomics: 'readonly', SharedArrayBuffer: 'readonly' },
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaFeatures: { jsx: true },
+    project: 'tsconfig.json',
+    createDefaultProgram: true,
     ecmaVersion: 2018,
     sourceType: 'module',
   },
@@ -34,6 +37,16 @@ module.exports = {
     'no-nested-ternary': 'off',
     'security/detect-object-injection': 'off',
     'default-case': ['error', { commentPattern: '^skip\\sdefault' }],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
@@ -88,6 +101,6 @@ module.exports = {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.js'],
     },
-    'import/resolver': { node: { paths: ['.'] }, typescript: './tsconfig.json' },
+    'import/resolver': { node: { paths: ['.'] }, typescript: {} },
   },
 };
