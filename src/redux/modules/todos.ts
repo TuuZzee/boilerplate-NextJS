@@ -1,7 +1,7 @@
 export const ADD_TODO = 'ADD_TODO' as const;
 export const REMOVE_TODO = 'REMOVE_TODO' as const;
 
-type Todo = {
+export type Todo = {
   id: string;
   text: string;
 };
