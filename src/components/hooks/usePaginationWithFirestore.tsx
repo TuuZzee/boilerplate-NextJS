@@ -1,9 +1,32 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { cloneDeep, isEmpty, isEqual } from 'lodash/fp';
-import { isLoaded, useFirestoreConnect } from 'react-redux-firebase';
+import { isLoaded, ReduxFirestoreQuerySetting, useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux/modules/';
 
-const usePaginationWithFirestore = ({ itemLimitPerQuery, collection, initialQuery }) => {
+export type Props = {
+  itemLimitPerQuery: number;
+  collection: string;
+  initialQuery: ReduxFirestoreQuerySetting;
+};
+
+export type UsePaginationWithFirestoreType = {
+  fetchNextPage: () => void;
+  fetchPrevPage: () => Promise<void>;
+  isFirstPage: boolean;
+  isLastPage: boolean;
+  isLoadingTx: boolean;
+  queryFirestore: ReduxFirestoreQuerySetting;
+  queryResult: any[];
+  setFirstItemCreatedAt: Dispatch<SetStateAction<string>>;
+  setQueryFirestore: Dispatch<SetStateAction<ReduxFirestoreQuerySetting>>;
+};
+
+const usePaginationWithFirestore = ({
+  itemLimitPerQuery,
+  collection,
+  initialQuery,
+}: Props): UsePaginationWithFirestoreType => {
   const [queryFirestore, setQueryFirestore] = useState(initialQuery);
   const [firstTxCreatedAt, setFirstItemCreatedAt] = useState('');
   const [paginationSettings, setPaginationSettings] = useState({
@@ -12,7 +35,7 @@ const usePaginationWithFirestore = ({ itemLimitPerQuery, collection, initialQuer
   });
   const [prevPage, setPrevPage] = useState([]);
 
-  const { queryResult } = useSelector(state => ({
+  const { queryResult } = useSelector((state: RootState) => ({
     queryResult: state.firestore.ordered[collection],
   }));
 

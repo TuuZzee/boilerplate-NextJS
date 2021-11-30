@@ -96,6 +96,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-one-expression-per-line': 'off', // Conflicts with prettier
     'react/jsx-curly-newline': 'off', // Conflicts with prettier
+    'import/named': 'off',
   },
   settings: {
     'import/parsers': {
