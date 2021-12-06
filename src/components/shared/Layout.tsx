@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { isEmpty, mergeAll } from 'lodash/fp';
 import { Container, Header, Content, Footer } from 'rsuite';
 
-import constants from 'src/utils/constants';
+import constants, { ErrorLevels } from 'src/utils/constants';
 import metaProps from 'src/utils/metaProps';
 import wordingCommon from 'src/locale/common';
 import wordingErrors from 'src/locale/errorMessages';
@@ -57,7 +57,7 @@ const Layout = ({ children, query, wordingPage }) => {
       {/* SEO */}
       <DefaultSeo
         title={metaProps.title}
-        keywords={metaProps.keywords[metaLocale]}
+        // keywords={metaProps.keywords[metaLocale]}
         description={metaProps.description[metaLocale]}
         openGraph={{
           type: 'website',
@@ -69,14 +69,14 @@ const Layout = ({ children, query, wordingPage }) => {
       />
 
       <FirebaseCollectionsLoaders route={router ? router.route : null} />
-      <FirestoreCollectionsLoaders route={router ? router.route : null} />
+      {/* <FirestoreCollectionsLoaders route={router ? router.route : null} /> */}
       <IntlProvider
         defaultLocale={currentLocale}
         key={currentLocale}
         locale={currentLocale}
         messages={intlMessages}
       >
-        <ErrorBoundary errorLevel={constants.ERRORS_LEVELS.layout}>
+        <ErrorBoundary errorLevel={ErrorLevels.layout}>
           <Container>
             <Header>
               <Nav />

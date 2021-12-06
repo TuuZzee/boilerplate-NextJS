@@ -28,8 +28,9 @@ export default {
     userPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID,
     userPoolWebClientId: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID,
   },
-  ERRORS_LEVELS: {
-    application: 'application',
-    layout: 'layout',
-  },
 };
+
+export enum ErrorLevels {
+  application = 'application',
+  layout = 'layout',
+}

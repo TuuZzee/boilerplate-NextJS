@@ -5,12 +5,12 @@ function Nav() {
   return (
     <nav>
       <li>
-        <Link id="nav-link-home" href="/" passHref>
+        <Link href="/" passHref>
           Home
         </Link>
       </li>
       <li>
-        <Link id="nav-link-about" href="/about" passHref>
+        <Link href="/about" passHref>
           About
         </Link>
       </li>

@@ -1,10 +1,17 @@
 // https://reactjs.org/docs/error-boundaries.html
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import constants from 'src/utils/constants';
+import { ErrorLevels } from 'src/utils/constants';
 
-class ErrorBoundary extends React.Component {
+type Props = {
+  errorLevel: ErrorLevels;
+  children: React.ReactNode;
+};
+type State = {
+  hasError: boolean;
+};
+
+class ErrorBoundary extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -36,15 +43,5 @@ class ErrorBoundary extends React.Component {
     return children;
   }
 }
-
-ErrorBoundary.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.shape([]), PropTypes.shape({}), PropTypes.node]),
-  errorLevel: PropTypes.oneOf([constants.ERRORS_LEVELS.application, constants.ERRORS_LEVELS.layout])
-    .isRequired,
-};
-
-ErrorBoundary.defaultProps = {
-  children: null,
-};
 
 export default ErrorBoundary;
