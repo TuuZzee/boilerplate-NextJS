@@ -1,6 +1,6 @@
 {
-  "*.{js,css,json,md}": "prettier --write",
-  "*.js": "eslint --fix",
-  "./src/**/styled.js": "stylelint",
-  "./src/styles/styledComponents/**/*.js": "stylelint"
+  "*.{js,css,json,md,ts,tsx}": "prettier --write",
+  "*.{js,ts,tsx}": "eslint --fix",
+  "./src/**/styled.{ts,js}": "stylelint",
+  "./src/styles/styledComponents/**/*.tsx": "stylelint"
 }
