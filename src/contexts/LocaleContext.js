@@ -1,9 +1,10 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+
 import localforage from 'localforage';
-import moment from 'moment';
-import PropTypes from 'prop-types';
-import Router from 'next/router';
 import { isEmpty } from 'lodash/fp';
+import moment from 'moment';
+import Router from 'next/router';
+import PropTypes from 'prop-types';
 
 import { getNavigator } from 'src/utils/browserClient';
 import { en, ko, supportedLocales } from 'src/utils/intl-i18n';
@@ -12,20 +13,19 @@ export const LocaleContext = createContext();
 
 export const localeStorageId = 'locale';
 
-const LocaleContextProvider = ({ children }) => {
+const LocaleContextProvider = function ({ children }) {
   const [currentLocale, setCurrentLocale] = useState(en);
 
-  const updateLocale = async locale => {
+  const updateLocale = useCallback(async locale => {
     try {
       if (supportedLocales.includes(locale)) {
         setCurrentLocale(locale);
-
         // Persist locale setting to API/Back-end
       }
     } catch (error) {
       console.error('LocaleContextProvider updateLocale - error: ', error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     const setDefaultLocale = async () => {
@@ -67,11 +67,15 @@ const LocaleContextProvider = ({ children }) => {
     localforage.setItem(localeStorageId, currentLocale);
   }, [currentLocale]);
 
-  return (
-    <LocaleContext.Provider value={{ currentLocale, updateLocale }}>
-      {children}
-    </LocaleContext.Provider>
+  const value = useMemo(
+    () => ({
+      currentLocale,
+      updateLocale,
+    }),
+    [currentLocale, updateLocale],
   );
+
+  return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>;
 };
 
 LocaleContextProvider.propTypes = {

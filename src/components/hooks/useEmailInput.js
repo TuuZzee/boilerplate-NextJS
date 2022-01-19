@@ -1,5 +1,6 @@
-import isEmail from 'validator/lib/isEmail';
 import { useState } from 'react';
+
+import isEmail from 'validator/lib/isEmail';
 
 const useEmailInput = initialValue => {
   const [emailInput, setEmailInput] = useState({

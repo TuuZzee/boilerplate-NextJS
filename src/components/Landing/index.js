@@ -1,12 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { useIntl } from 'react-intl';
 
-import Todo from './Todo';
+import { useIntl } from 'react-intl';
+import { connect } from 'react-redux';
 
 import { LandingTitle, LandingWrapper } from './styled';
+import Todo from './Todo';
 
-const Landing = () => {
+function Landing() {
   const intl = useIntl();
 
   return (
@@ -15,6 +15,6 @@ const Landing = () => {
       <Todo />
     </LandingWrapper>
   );
-};
+}
 
 export default connect()(Landing);

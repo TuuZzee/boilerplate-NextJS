@@ -15,7 +15,7 @@ export function removeTodo(todo) {
   };
 }
 
-const todoReducer = (state = [], action) => {
+const todoReducer = (state = [], action = {}) => {
   const { type, text, todo } = action;
 
   switch (type) {

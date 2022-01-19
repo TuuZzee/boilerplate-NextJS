@@ -1,6 +1,7 @@
-import React, { createContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+
 import localforage from 'localforage';
+import PropTypes from 'prop-types';
 
 import { dark, supportedUIthemes } from 'src/styles/theme';
 import { getBrowserWindow, getBrowserDocument } from 'src/utils/browserClient';
@@ -10,7 +11,7 @@ export const UiUxContext = createContext();
 const uiThemeStorageId = 'uiTheme';
 const resizeEventId = 'resize';
 
-const UiUxContextProvider = ({ children }) => {
+const UiUxContextProvider = function ({ children }) {
   const [deviceProps, setDeviceProps] = useState({
     devicePixelRatio: 1,
     heightScreen: 1080,
@@ -19,7 +20,7 @@ const UiUxContextProvider = ({ children }) => {
   });
   const [uiTheme, setUiTheme] = useState(dark);
 
-  const updateDimensions = () => {
+  const updateDimensions = useCallback(() => {
     const w = getBrowserWindow();
     const d = getBrowserDocument();
 
@@ -36,13 +37,13 @@ const UiUxContextProvider = ({ children }) => {
         heightScreen,
       });
     }
-  };
+  }, []);
 
-  const updateUiTheme = newTheme => {
+  const updateUiTheme = useCallback(newTheme => {
     if (supportedUIthemes.includes(newTheme)) {
       setUiTheme(newTheme);
     }
-  };
+  }, []);
 
   useEffect(() => {
     const setDefaultTheme = async () => {
@@ -67,18 +68,17 @@ const UiUxContextProvider = ({ children }) => {
     localforage.setItem(uiThemeStorageId, uiTheme);
   }, [uiTheme]);
 
-  return (
-    <UiUxContext.Provider
-      value={{
-        ...deviceProps,
-        uiTheme,
-        updateDimensions,
-        updateUiTheme,
-      }}
-    >
-      {children}
-    </UiUxContext.Provider>
+  const value = useMemo(
+    () => ({
+      ...deviceProps,
+      uiTheme,
+      updateDimensions,
+      updateUiTheme,
+    }),
+    [deviceProps, uiTheme, updateDimensions, updateUiTheme],
   );
+
+  return <UiUxContext.Provider value={value}>{children}</UiUxContext.Provider>;
 };
 
 UiUxContextProvider.propTypes = {

@@ -4,8 +4,8 @@ import localforage from 'localforage';
 import { cloneDeep } from 'lodash/fp';
 import { toastr } from 'react-redux-toastr';
 
-import localeErrorMsg from 'src/locale/errorMessages';
 import { localeStorageId } from 'src/contexts/LocaleContext';
+import localeErrorMsg from 'src/locale/errorMessages';
 
 import constants from './constants';
 import Emitter from './emitter';

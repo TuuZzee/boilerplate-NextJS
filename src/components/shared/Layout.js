@@ -1,26 +1,27 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import Script from 'next/script';
-import { IntlProvider } from 'react-intl';
+
+import { isEmpty, mergeAll } from 'lodash/fp';
 import { DefaultSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { isEmpty, mergeAll } from 'lodash/fp';
+import Script from 'next/script';
+import PropTypes from 'prop-types';
+import { IntlProvider } from 'react-intl';
 import { Container, Header, Content, Footer } from 'rsuite';
 
-import constants from 'src/utils/constants';
-import metaProps from 'src/utils/metaProps';
+import { LocaleContext } from 'src/contexts/LocaleContext';
 import wordingCommon from 'src/locale/common';
 import wordingErrors from 'src/locale/errorMessages';
-import { LocaleContext } from 'src/contexts/LocaleContext';
+import constants from 'src/utils/constants';
 import { en, flattenMessages } from 'src/utils/intl-i18n';
+import metaProps from 'src/utils/metaProps';
 
-import EnvironmentBadge from './EnvironmentBadge';
-import ErrorBoundary from './ErrorBoundary';
 import FirebaseCollectionsLoaders from './dataLoaders/firebase/Collections';
 import FirestoreCollectionsLoaders from './dataLoaders/firestore/Collections';
+import EnvironmentBadge from './EnvironmentBadge';
+import ErrorBoundary from './ErrorBoundary';
 import Nav from './Nav';
 
-const Layout = ({ children, query, wordingPage }) => {
+function Layout({ children, query, wordingPage }) {
   const router = useRouter();
   const { currentLocale } = useContext(LocaleContext);
 
@@ -40,9 +41,9 @@ const Layout = ({ children, query, wordingPage }) => {
         strategy="beforeInteractive"
       />
       {/* Status Page and analitics */}
-      {process.env.NEXT_PUBLIC_APP_ENV === 'production' ? (
+      {/* {process.env.NEXT_PUBLIC_APP_ENV === 'production' ? (
         <>
-          {/* <Script
+          <Script
             src="https://www.datadoghq-browser-agent.com/datadog-rum.js"
             type="text/javascript"
             strategy="beforeInteractive"
@@ -50,9 +51,9 @@ const Layout = ({ children, query, wordingPage }) => {
           <Script
             src="https://{code}.statuspage.io/embed/script.js"
             strategy="beforeInteractive"
-          /> */}
+          />
         </>
-      ) : null}
+      ) : null} */}
 
       {/* SEO */}
       <DefaultSeo
@@ -89,7 +90,7 @@ const Layout = ({ children, query, wordingPage }) => {
       <EnvironmentBadge />
     </div>
   );
-};
+}
 
 Layout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),

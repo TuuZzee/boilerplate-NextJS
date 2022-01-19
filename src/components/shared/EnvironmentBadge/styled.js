@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Message } from 'rsuite';
+import styled from 'styled-components';
 
 export const EnvBadgeBlock = styled.div`
   position: fixed;

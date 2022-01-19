@@ -1,12 +1,13 @@
-import React, { createContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { createContext, useMemo, useEffect, useState } from 'react';
+
 import Router from 'next/router';
+import PropTypes from 'prop-types';
 
 export const RoutingContext = createContext();
 
 const routeChangeStartEventId = 'routeChangeStart';
 
-const RoutingContextProvider = ({ children }) => {
+const RoutingContextProvider = function ({ children }) {
   const [previousUrl, setPreviousUrl] = useState('');
 
   useEffect(() => {
@@ -16,15 +17,15 @@ const RoutingContextProvider = ({ children }) => {
     };
   }, []);
 
-  return <RoutingContext.Provider value={{ previousUrl }}>{children}</RoutingContext.Provider>;
+  const value = useMemo(() => ({ previousUrl }), [previousUrl]);
+
+  return <RoutingContext.Provider value={value}>{children}</RoutingContext.Provider>;
 };
 
 RoutingContextProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
-RoutingContextProvider.defaultProps = {
-  children: null,
-};
+RoutingContextProvider.defaultProps = { children: null };
 
 export default RoutingContextProvider;

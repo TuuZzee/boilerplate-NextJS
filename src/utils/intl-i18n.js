@@ -1,8 +1,8 @@
+import parse from 'html-react-parser';
+import localforage from 'localforage';
 // eslint-disable-next-line lodash-fp/use-fp
 import _ from 'lodash';
-import localforage from 'localforage';
 import sanitizeHtml from 'sanitize-html';
-import parse from 'html-react-parser';
 
 export const en = 'en';
 export const ko = 'ko';

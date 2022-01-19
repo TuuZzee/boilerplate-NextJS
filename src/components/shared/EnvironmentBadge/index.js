@@ -2,7 +2,7 @@ import React from 'react';
 
 import { EnvBadgeBlock, EnvBadgeMessage } from './styled';
 
-const EnvironmentBadge = () => {
+function EnvironmentBadge() {
   return (
     process.env.NEXT_PUBLIC_APP_ENV !== 'production' && (
       <EnvBadgeBlock>
@@ -10,6 +10,6 @@ const EnvironmentBadge = () => {
       </EnvBadgeBlock>
     )
   );
-};
+}
 
 export default EnvironmentBadge;

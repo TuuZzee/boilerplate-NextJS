@@ -1,32 +1,30 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import React from 'react';
+
 import Head from 'next/head';
-import NProgress from 'nprogress';
 import Router from 'next/router';
-import ReduxToastr from 'react-redux-toastr';
+import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
-import { Provider, useStore } from 'react-redux';
 // To enable Firebase/Firestore config needs add a valid Firebase app keys to .env.local
 // import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 // import { createFirestoreInstance } from 'redux-firestore';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { Provider, useStore } from 'react-redux';
+import ReduxToastr from 'react-redux-toastr';
 
-import constants from 'src/utils/constants';
 import ErrorBoundary from 'src/components/shared/ErrorBoundary';
 // import firebaseApp from 'src/utils/firebaseApp';
 import ThemeHandler from 'src/components/shared/ThemeHandler';
 import LocaleContextProvider from 'src/contexts/LocaleContext';
-import UiUxContextProvider from 'src/contexts/UiUxContext';
 import RoutingContextProvider from 'src/contexts/RoutingContext';
+import UiUxContextProvider from 'src/contexts/UiUxContext';
 import wrapper from 'src/redux/store';
 import { GlobalStyles } from 'src/styles/styledComponents/globalStyled';
+import constants from 'src/utils/constants';
 
-// [Note]: extra configuration might be needed if
-//         some components aren't working properly for React Suite
-// -> https://rsuitejs.com/guide/use-next-app/
-import 'rsuite/dist/styles/rsuite-default.css';
+import 'rsuite/dist/rsuite.min.css';
 import 'src/styles/index.scss';
 
 const queryClient = new QueryClient();
@@ -42,7 +40,7 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-const App = ({ Component, pageProps }) => {
+function App({ Component, pageProps }) {
   const store = useStore();
 
   // const rrfProps = {
@@ -91,7 +89,7 @@ const App = ({ Component, pageProps }) => {
       </Provider>
     </ErrorBoundary>
   );
-};
+}
 
 App.propTypes = {
   Component: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({})]).isRequired,

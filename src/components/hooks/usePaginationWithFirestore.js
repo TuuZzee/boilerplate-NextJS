@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+
 import { cloneDeep, isEmpty, isEqual } from 'lodash/fp';
-import { isLoaded, useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
+import { isLoaded, useFirestoreConnect } from 'react-redux-firebase';
 
 const usePaginationWithFirestore = ({ itemLimitPerQuery, collection, initialQuery }) => {
   const [queryFirestore, setQueryFirestore] = useState(initialQuery);
