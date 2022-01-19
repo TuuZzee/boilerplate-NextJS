@@ -18,12 +18,38 @@ module.exports = {
     ecmaFeatures: { jsx: true },
     ecmaVersion: 2018,
     sourceType: 'module',
+    requireConfigFile: false,
   },
   plugins: ['import', 'lodash-fp', 'no-secrets', 'prettier', 'react-hooks', 'react', 'security'],
   rules: {
-    'no-nested-ternary': 'off',
-    'security/detect-object-injection': 'off',
+    'func-names': ['error', 'as-needed'],
     'default-case': ['error', { commentPattern: '^skip\\sdefault' }],
+    'import/order': [
+      'error',
+      {
+        alphabetize: { order: 'asc', caseInsensitive: true },
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+        'newlines-between': 'always-and-inside-groups',
+        pathGroups: [
+          {
+            pattern: '@namespace/**',
+            group: 'external',
+            position: 'after',
+          },
+          {
+            pattern: '@/**',
+            group: 'external',
+            position: 'after',
+          },
+          {
+            pattern: 'react',
+            group: 'builtin',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['builtin', 'react'],
+      },
+    ],
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
@@ -32,10 +58,7 @@ module.exports = {
         aspects: ['invalidHref', 'preferButton'],
       },
     ],
-    'no-console':
-      process.env.NEXT_PUBLIC_APP_ENV === 'production'
-        ? ['error', { allow: ['warn', 'error'] }]
-        : ['error', { allow: ['debug', 'warn', 'error'] }],
+    'no-console': 'off',
     'no-param-reassign': [
       'error',
       {
@@ -46,6 +69,7 @@ module.exports = {
     'no-secrets/no-secrets': 'error',
     'no-underscore-dangle': ['error', { allow: ['__REDUX_DEVTOOLS_EXTENSION__'] }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'no-nested-ternary': 'off',
     'prettier/prettier': [
       'error',
       {
@@ -73,8 +97,11 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-one-expression-per-line': 'off', // Conflicts with prettier
     'react/jsx-curly-newline': 'off', // Conflicts with prettier
+    'security/detect-object-injection': 'off',
   },
   settings: {
-    'import/resolver': { node: { paths: ['.'] } },
+    'import/resolver': {
+      node: { paths: ['.'] },
+    },
   },
 };

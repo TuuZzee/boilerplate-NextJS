@@ -1,24 +1,15 @@
 import React, { useState } from 'react';
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  Button,
-  ButtonToolbar,
-  Divider,
-  ControlLabel,
-  FlexboxGrid,
-  Form,
-  FormControl,
-  FormGroup,
-  HelpBlock,
-  List,
-} from 'rsuite';
+import { Button, ButtonToolbar, Divider, FlexboxGrid, Form, List } from 'rsuite';
 
 import { addTodo, removeTodo } from 'src/redux/modules/todos';
+
 import TodoItem from './TodoItem';
 
 // eslint-disable-next-line no-shadow
-const Todo = ({ todos, addTodo, removeTodo }) => {
+function Todo({ todos, addTodo, removeTodo }) {
   const [text, changeText] = useState('');
 
   const handleAddTodo = () => {
@@ -38,18 +29,18 @@ const Todo = ({ todos, addTodo, removeTodo }) => {
       <FlexboxGrid justify="center">
         <FlexboxGrid.Item colSpan={6}>
           <Form onSubmit={handleAddTodo}>
-            <FormGroup>
-              <ControlLabel>Add ToDo:</ControlLabel>
-              <FormControl onChange={handleTextChange} name="addTodoInput" value={text} />
-              <HelpBlock>Required</HelpBlock>
-            </FormGroup>
-            <FormGroup>
+            <Form.Group>
+              <Form.ControlLabel>Add ToDo:</Form.ControlLabel>
+              <Form.Control onChange={handleTextChange} name="addTodoInput" value={text} />
+              <Form.HelpText>Required</Form.HelpText>
+            </Form.Group>
+            <Form.Group>
               <ButtonToolbar>
                 <Button appearance="primary" disabled={text === ''} onClick={handleAddTodo}>
                   Submit
                 </Button>
               </ButtonToolbar>
-            </FormGroup>
+            </Form.Group>
           </Form>
           <br />
           <div>
@@ -64,7 +55,7 @@ const Todo = ({ todos, addTodo, removeTodo }) => {
       <Divider />
     </div>
   );
-};
+}
 
 Todo.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({ text: PropTypes.string })),

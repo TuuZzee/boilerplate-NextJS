@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 // import { firebaseConnect } from 'react-redux-firebase';
@@ -9,9 +10,9 @@ import { compose } from 'redux';
 // const { landing  } = urls.inner;
 // const includeBannersPaths = [landing.path];
 
-const Collections = () => {
+function Collections() {
   return <div className="data-loaders-firebase-collections" />;
-};
+}
 
 const mapStateToProps = () => ({});
 

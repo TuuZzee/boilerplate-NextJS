@@ -1,5 +1,6 @@
 // https://reactjs.org/docs/error-boundaries.html
 import React from 'react';
+
 import PropTypes from 'prop-types';
 
 import constants from 'src/utils/constants';

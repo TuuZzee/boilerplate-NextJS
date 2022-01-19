@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 // import { firestoreConnect } from 'react-redux-firebase';
@@ -7,9 +8,9 @@ import { compose } from 'redux';
 // import urls from 'src/utils/urls';
 // const { landing } = urls.inner;
 
-const Collections = () => {
+function Collections() {
   return <div className="data-loaders-firestore-collections" />;
-};
+}
 
 const mapStateToProps = () => ({});
 
