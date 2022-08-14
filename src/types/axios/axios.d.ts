@@ -1,13 +1,27 @@
-import * as axios from 'axios'
+import * as axios from 'axios';
 
 declare module 'axios' {
-  export interface AxiosResponse<any>  {
-    data: T;
-    status: number;
-    statusText: string;
-    headers: Record<string, string>;
-    config: AxiosRequestConfig<T>;
-    request?: any;
+  export interface AxiosRequestConfig {
+    useFormData?: boolean;
+    useAuth?: boolean;
+    toastrSuccessContent?: string;
+    toastrInfoContent?: string;
+  }
+
+  export interface AxiosResponse {
+    config: AxiosRequestConfig;
+  }
+
+  export interface AxiosInstance extends Axios {
+    (config: AxiosRequestConfig): AxiosPromise;
+    (url: string, config?: AxiosRequestConfig): AxiosPromise;
+    interceptors: {
+      request: AxiosInterceptorManager<AxiosRequestConfig>;
+      response: AxiosInterceptorManager<AxiosResponse<any>>;
+    };
+  }
+
+  export interface AxiosStatic extends AxiosInstance {
+    create(config?: AxiosRequestConfig): AxiosInstance;
   }
 }
- 

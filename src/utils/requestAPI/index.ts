@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axiosRetry from 'axios-retry';
 import localforage from 'localforage';
 import { cloneDeep } from 'lodash/fp';
@@ -10,12 +10,7 @@ import { localeStorageId } from 'src/contexts/LocaleContext';
 import constants from '../constants';
 import Emitter from '../emitter';
 import { flattenMessages } from '../intl-i18n';
-import {
-  ClientTokenType,
-  CustomAxiosReqConfigTypes,
-  CustomInstance,
-  CustomResponse,
-} from './requestAPITypes';
+import { ClientTokenType } from './requestAPITypes';
 
 export const authenticationFailed = 'authentication_fail';
 export const clientTokenStorageId = 'clientTokens';
@@ -38,7 +33,7 @@ const clearSession: () => Promise<void> = async () => {
   await localforage.removeItem(clientTokenStorageId);
 };
 
-const requestAPI: CustomInstance = axios.create({
+const requestAPI: AxiosInstance = axios.create({
   baseURL: `${API.host}/`,
   headers: { 'Content-Type': 'application/json' },
   timeout,
@@ -46,22 +41,37 @@ const requestAPI: CustomInstance = axios.create({
 
 axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });
 
+export const requestGetAPI = <T, D>(config?: AxiosRequestConfig<D>) =>
+  requestAPI.get<T, AxiosResponse<T>, D>(config.url, config);
+
+export const requestPostAPI = <T, D>(config?: AxiosRequestConfig<D>) =>
+  requestAPI.post<T, AxiosResponse<T>, D>(config.url, config.data, config);
+
+export const requestPutAPI = <T, D>(config?: AxiosRequestConfig<D>) =>
+  requestAPI.put<T, AxiosResponse<T>, D>(config.url, config.data, config);
+
+export const requestDeleteAPI = <T, D>(config?: AxiosRequestConfig<D>) =>
+  requestAPI.delete<T, AxiosResponse<T>, D>(config.url, config);
+
+export const requestPatchAPI = <T, D>(config?: AxiosRequestConfig<D>) =>
+  requestAPI.patch<T, AxiosResponse<T>, D>(config.url, config.data, config);
+
 // Request interceptor
 requestAPI.interceptors.request.use(
-  async (config: CustomAxiosReqConfigTypes) => {
+  async (config: AxiosRequestConfig) => {
     try {
       if (isNotProduction) {
         console.debug('requestAPI - interceptors.req sent config: ', config);
       }
 
       const configReq = cloneDeep(config);
-      configReq.headers['Accept-Language'] = await localforage.getItem(localeStorageId);
 
       // Authenticated request add the accessToken in the header
       if (configReq.useAuth) {
         const { accessToken } = await getClientTokens();
         configReq.headers.Authorization = `Bearer ${accessToken}`;
       }
+
       return configReq;
     } catch (error) {
       console.error(`requestAPI - interceptors.req config: ${config} - error: ${error}`);
@@ -77,7 +87,7 @@ requestAPI.interceptors.request.use(
 
 // Response interceptor
 requestAPI.interceptors.response.use(
-  async (res: CustomResponse<any>) => {
+  async (res: AxiosResponse) => {
     try {
       if (isNotProduction) {
         console.debug('requestAPI - interceptors.res sent res: ', res);

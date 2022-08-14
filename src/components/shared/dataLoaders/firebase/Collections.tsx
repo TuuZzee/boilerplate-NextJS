@@ -1,7 +1,7 @@
 import React, { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firebaseConnect, ProfileType, WithFirebaseProps } from 'react-redux-firebase';
+import { firebaseConnect, WithFirebaseProps } from 'react-redux-firebase';
 
 // import urls from 'src/utils/urls';
 
