@@ -43,20 +43,20 @@ export const GlobalStyles = createGlobalStyle`
   ** Scrollbars
   */
   ::-webkit-scrollbar {
-    background-color: ${({ theme }) => theme.colors.background.body};
+    background-color: ${({ theme }) => theme.colors.whiteHfff};
     width: 16px;
   }
 
   /* background of the scrollbar except button or resizer */
   ::-webkit-scrollbar-track {
-    background-color: ${({ theme }) => theme.colors.background.body};
+    background-color: ${({ theme }) => theme.colors.whiteHfff};
   }
 
   /* scrollbar itself */
   ::-webkit-scrollbar-thumb {
     background-color: ${colors.blackH222};
     border-radius: 16px;
-    border: 4px solid ${({ theme }) => theme.colors.background.body};
+    border: 4px solid ${({ theme }) => theme.colors.whiteHfff};
   }
 
   /* set button(top and bottom of the scrollbar) */

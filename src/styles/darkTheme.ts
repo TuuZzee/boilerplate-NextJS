@@ -1,18 +1,8 @@
+import { DefaultTheme } from 'styled-components';
 import { colors } from './theme';
 
-export default {
-  colors: {
-    background: {
-      body: colors.blackH222,
-    },
-    border: {},
-    text: {
-      text: {
-        title: colors.whiteHfff,
-      },
-    },
-  },
-  images: {},
-  elevations: {},
-  boxShadows: {},
+const darkTheme: DefaultTheme = {
+  colors,
 };
+
+export default darkTheme;

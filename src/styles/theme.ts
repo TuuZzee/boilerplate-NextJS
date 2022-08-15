@@ -11,13 +11,14 @@ export const widthsPx = {
 
 export const colors = {
   blackH222: '#222',
-
   greenH04e77f: '#04e77f',
-
   redHe01e3c: '#e01e3c',
-
   whiteHfff: '#fff',
-};
+} as const;
+
+type O = typeof colors;
+type K = keyof O;
+export type ColorsType = O[K];
 
 export const dark = 'dark';
 export const light = 'light';
