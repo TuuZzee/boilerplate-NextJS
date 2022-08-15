@@ -1,19 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
+import { Navbar, NavItem } from 'reactstrap';
 
 function Nav() {
   return (
-    <nav>
-      <li>
+    <Navbar>
+      <NavItem>
         <Link href="/" passHref>
           Home
         </Link>
-      </li>
-      <li>
+      </NavItem>
+      <NavItem>
         <Link href="/about" passHref>
           About
         </Link>
-      </li>
+      </NavItem>
       <style>{`
         nav {
           display: flex;
@@ -24,7 +25,7 @@ function Nav() {
           margin-right: 1rem;
         }
       `}</style>
-    </nav>
+    </Navbar>
   );
 }
 

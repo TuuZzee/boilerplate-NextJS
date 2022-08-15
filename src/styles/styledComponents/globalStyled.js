@@ -54,7 +54,7 @@ export const GlobalStyles = createGlobalStyle`
 
   /* scrollbar itself */
   ::-webkit-scrollbar-thumb {
-    background-color: ${colors.greyHbdbdbd};
+    background-color: ${colors.blackH222};
     border-radius: 16px;
     border: 4px solid ${({ theme }) => theme.colors.background.body};
   }

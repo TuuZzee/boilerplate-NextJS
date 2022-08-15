@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   inner: {
     landing: { path: '/' },
     about: { path: '/about' },

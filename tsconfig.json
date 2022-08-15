@@ -15,13 +15,14 @@
     "baseUrl": ".",
     "typeRoots": ["./node_modules/@types", "./src/types/"],
     "paths": {
-      "@/reduxModules/*": ["src/redux/modules/*"],
-      "@/customContext/*": ["src/contexts/*"],
-      "@/locale/*": ["src/locale/*"],
-      "@/styles/*": ["src/styles/*"],
-      "@/utils/*": ["src/utils/*"]
+      "src/redux/modules/*": ["src/redux/modules/*"],
+      "src/contexts/*": ["src/contexts/*"],
+      "src/locale/*": ["src/locale/*"],
+      "src/styles/*": ["src/styles/*"],
+      "src/utils/*": ["src/utils/*"]
     },
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

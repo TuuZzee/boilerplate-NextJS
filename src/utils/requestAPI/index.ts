@@ -1,15 +1,13 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axiosRetry from 'axios-retry';
 import localforage from 'localforage';
-import { cloneDeep } from 'lodash/fp';
+import { cloneDeep } from 'lodash-es';
 import { toastr } from 'react-redux-toastr';
 
 import localeErrorMsg from 'src/locale/errorMessages';
-import { localeStorageId } from 'src/contexts/LocaleContext';
 
 import constants from '../constants';
 import Emitter from '../emitter';
-import { flattenMessages } from '../intl-i18n';
 import { ClientTokenType } from './requestAPITypes';
 
 export const authenticationFailed = 'authentication_fail';
@@ -125,8 +123,7 @@ requestAPI.interceptors.response.use(
     const { response } = error;
     const { config, data } = response;
 
-    const locale = await localforage.getItem(localeStorageId);
-    const errorMsgList = flattenMessages(localeErrorMsg[locale]);
+    const errorMsgList = localeErrorMsg;
 
     let errorMsg = errorMsgList['errorMsg.default'];
     try {

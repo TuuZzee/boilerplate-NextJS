@@ -1,25 +1,21 @@
-/* eslint-disable jsx-a11y/label-has-for */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { RootState } from 'src/redux/modules/';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
-  ButtonToolbar,
-  Divider,
-  ControlLabel,
-  FlexboxGrid,
+  Container,
   Form,
-  FormControl,
+  FormFeedback,
   FormGroup,
-  HelpBlock,
-  List,
-} from 'rsuite';
+  Input,
+  Label,
+  ListGroup,
+} from 'reactstrap';
 
 import { addTodo, removeTodo } from 'src/redux/modules/todos';
+import { RootState } from 'src/redux/modules';
+
 import TodoItem from './TodoItem';
 
-// eslint-disable-next-line no-shadow
 const Todo = () => {
   const dispatch = useDispatch();
   const [text, changeText] = useState('');
@@ -40,38 +36,32 @@ const Todo = () => {
 
   return (
     <div>
-      <Divider />
-      <FlexboxGrid justify="center">
-        <FlexboxGrid.Item colspan={6}>
-          <Form onSubmit={handleAddTodo}>
-            <FormGroup>
-              <ControlLabel>Add ToDo:</ControlLabel>
-              <FormControl onChange={handleTextChange} name="addTodoInput" value={text} />
-              <HelpBlock>Required</HelpBlock>
-            </FormGroup>
-            <FormGroup>
-              <ButtonToolbar>
-                <Button appearance="primary" disabled={text === ''} onClick={handleAddTodo}>
-                  Submit
-                </Button>
-              </ButtonToolbar>
-            </FormGroup>
-          </Form>
-          <br />
-          <div>
-            <List>
-              {todos.map((todo, i) => (
-                <TodoItem
-                  key={`#${i.toString()}-todo`}
-                  todo={todo}
-                  remove={() => dispatch(removeTodo)}
-                />
-              ))}
-            </List>
-          </div>
-        </FlexboxGrid.Item>
-      </FlexboxGrid>
-      <Divider />
+      <Container>
+        <Form onSubmit={handleAddTodo}>
+          <FormGroup>
+            <Label>Add ToDo:</Label>
+            <Input onChange={handleTextChange} name="addTodoInput" value={text} />
+            <FormFeedback>Required</FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Button disabled={text === ''} onClick={handleAddTodo}>
+              Submit
+            </Button>
+          </FormGroup>
+        </Form>
+        <br />
+        <div>
+          <ListGroup>
+            {todos.map((todo, i) => (
+              <TodoItem
+                key={`#${i.toString()}-todo`}
+                todo={todo}
+                remove={() => dispatch(removeTodo(todo))}
+              />
+            ))}
+          </ListGroup>
+        </div>
+      </Container>
     </div>
   );
 };

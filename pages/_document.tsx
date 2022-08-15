@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="ko">
         <Head>
           {/* Links */}
           <link rel="manifest" href="manifest.json" />
@@ -39,9 +39,6 @@ export default class MyDocument extends Document {
           {/* CSS imports */}
         </Head>
         <body>
-          <a className="skip-link" href="#main">
-            Skip to main
-          </a>
           <Main />
           <NextScript />
         </body>

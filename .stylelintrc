@@ -2,7 +2,7 @@
   "extends": [
     "stylelint-config-standard",
     "stylelint-config-styled-components",
-    "stylelint-config-recommended",
+    "stylelint-config-recommended"
   ],
   "syntax": "scss",
   "rules": {

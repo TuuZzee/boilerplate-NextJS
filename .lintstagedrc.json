@@ -2,5 +2,5 @@
   "*.{js,css,json,md,ts,tsx}": "prettier --write",
   "*.{js,ts,tsx}": "eslint --fix",
   "./src/**/styled.{ts,js}": "stylelint",
-  "./src/styles/styledComponents/**/*.tsx": "stylelint"
+  "./src/styles/styledComponents/**/*.ts": "stylelint"
 }
