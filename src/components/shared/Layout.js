@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
 import { isEmpty, mergeAll } from 'lodash/fp';
-import { DefaultSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
+import { DefaultSeo } from 'next-seo';
 import PropTypes from 'prop-types';
 import { IntlProvider } from 'react-intl';
 import { Container, Header, Content, Footer } from 'rsuite';
