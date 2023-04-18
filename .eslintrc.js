@@ -10,6 +10,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:react/recommended',
     'plugin:security/recommended',
+    'plugin:@next/next/recommended',
     'prettier',
   ],
   globals: { Atomics: 'readonly', SharedArrayBuffer: 'readonly', google: 'readonly' },
@@ -109,7 +110,6 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-one-expression-per-line': 'off', // Conflicts with prettier
     'react/jsx-curly-newline': 'off', // Conflicts with prettier
-    'react/jsx-props-no-spreading': 'off', // Off since prop-types should protect agains this, nice to have for storybook
     'react/prop-types': ['error', { ignore: ['containerStore'] }],
     'security/detect-object-injection': 'off',
   },
