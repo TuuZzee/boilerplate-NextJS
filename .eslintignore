@@ -4,6 +4,4 @@ dist/
 node_modules/
 out/
 .next/
-.serverless_nextjs/**
-*.serverless/**
 yarn.lock
