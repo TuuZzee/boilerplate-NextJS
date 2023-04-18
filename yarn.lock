@@ -2652,10 +2652,10 @@
   resolved "https://registry.yarnpkg.com/@next/env/-/env-13.3.0.tgz#cc2e49f03060a4684ce7ec7fd617a21bc5b9edba"
   integrity sha512-AjppRV4uG3No7L1plinoTQETH+j2F10TEnrMfzbTUYwze5sBUPveeeBAPZPm8OkJZ1epq9OyYKhZrvbD6/9HCQ==
 
-"@next/eslint-plugin-next@13.2.4":
-  version "13.2.4"
-  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-13.2.4.tgz#3e124cd10ce24dab5d3448ce04104b4f1f4c6ca7"
-  integrity sha512-ck1lI+7r1mMJpqLNa3LJ5pxCfOB1lfJncKmRJeJxcJqcngaFwylreLP7da6Rrjr6u2gVRTfmnkSkjc80IiQCwQ==
+"@next/eslint-plugin-next@13.3.0":
+  version "13.3.0"
+  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-13.3.0.tgz#3a4742b0817575cc0dd4d152cb10363584c215ac"
+  integrity sha512-wuGN5qSEjSgcq9fVkH0Y/qIPFjnZtW3ZPwfjJOn7l/rrf6y8J24h/lo61kwqunTyzZJm/ETGfGVU9PUs8cnzEA==
   dependencies:
     glob "7.1.7"
 
@@ -9752,7 +9752,7 @@ next@11.1.2:
     "@next/swc-linux-x64-gnu" "11.1.2"
     "@next/swc-win32-x64-msvc" "11.1.2"
 
-next@^13.2.4:
+next@^13.3.0:
   version "13.3.0"
   resolved "https://registry.yarnpkg.com/next/-/next-13.3.0.tgz#40632d303d74fc8521faa0a5bf4a033a392749b1"
   integrity sha512-OVTw8MpIPa12+DCUkPqRGPS3thlJPcwae2ZL4xti3iBff27goH024xy4q2lhlsdoYiKOi8Kz6uJoLW/GXwgfOA==
