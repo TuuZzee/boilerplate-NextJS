@@ -1,47 +1,26 @@
 # Run Linters for code checks on every PR open (Eslint and StyleLint)
-# Might add on push later if possible base on activity
 name: Codebase Checker
 
 on:
   pull_request:
-    types: [ opened, synchronize ]
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
       with:
-        node-version: '12.22.6'
-
-    - name: Cache packages dependencies installation
-      uses: actions/cache@v2
-      id: cache_pkgs
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-cache_pkgs-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-build-
-    - name: Cache Node Modules
-      uses: actions/cache@v2
-      id: cache_node_modules
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-cache_node_modules-${{ hashFiles('**/yarn.lock') }}
-    - name: Install dependencies
-      uses: borales/actions-yarn@v2.3.0
-      with:
-        cmd: install
-      if: steps.cache_node_modules.outputs.cache-hit != 'true' # skip this step if cacher restored
+        node-version: '16.17.1'
+        cache: 'yarn'
+    - run: yarn install
 
     - name: Validate Javascript files with Eslint
-      uses: borales/actions-yarn@v2.3.0
-      with:
-        cmd: jsLint
+      run: yarn jsLint
 
     - name: Validate CSS and Styled Component code with StyleLint
-      uses: borales/actions-yarn@v2.3.0
-      with:
-        cmd: cssLint
+      run: yarn cssLint
