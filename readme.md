@@ -33,16 +33,14 @@ packages pre-installed and pre-configured:
   check the `package.json` file.
 
 [Notes]: Comes with prebuild localization support (defaulted to en/ko) and dark/ligth mode support
-ready. Recommanded NodeJS version:
+ready.
 
 [Note2]: Some packages are locked in specific version until fix is available:
 
 ```
-"rsuite": "^4.10.2", # breaking changes in version ^5.1.0 for SSR
-
-"stylelint": "^13.13.1", # breaking change on v14 for JS file scanning.
-"stylelint-config-recommended": "^5.0.0",
-"stylelint-config-standard": "^22.0.0",
+"stylelint": "^14.16.1", # breaking changes - migration steps required
+"stylelint-config-recommended": "^9.0.0",
+"stylelint-config-standard-scss": "^6.1.0",
 ```
 
 ## Contents
@@ -54,7 +52,7 @@ ready. Recommanded NodeJS version:
 ### Requirements
 
 You need to have `yarn` installed. Recommand using [n](https://github.com/tj/n) to manage node
-version more easely. Node version recommanded: v14.17.6
+version more easely. Node version recommanded: v16.17.1
 
 ```sh
 # Install npm
@@ -63,8 +61,8 @@ brew install npm
 npm install --global yarn
 # Install n
 npm install -g n
-# Install node version v14.17.6
-n 14.17.6
+# Install node version v16.17.1
+n 16.17.1
 ```
 
 ### Installation
@@ -110,7 +108,7 @@ Here is the complete structure:
 ```
 .
 ├── .github/                   # Workflow files (Github Actions)
-├── husky/                     # Husky config and scripts (pre-commits hook)
+├── .husky/                    # Husky config and scripts (pre-commits hook)
 ├── build/                     # Build Folders for config files
 │ ├── production/              # Production Env config files (serverless + .env)
 │ ├── qa/                      # QA Env config files (serverless + .env)
@@ -124,18 +122,19 @@ Here is the complete structure:
 │ ├── redux/                   # Redux modules (use Ducks patern)
 │ ├── styles/                  # Global styling and pkgs styling imports
 │ └── utils/                   # Constants, Pkgs init, tools and utils
-├── .babelrc
 ├── .codeclimate.yml
-├──.editorconfig
-├──.eslintignore
-├──.eslintrc.js
-├──.gitignore
-├──.lintstagedrc.json
-├──.prettierignore
-├──.prettierrc
-├──.snyk
-├──.stylelintignore
-├──.stylelintrc
+├── .editorconfig
+├── .eslintignore
+├── .eslintrc.js
+├── .gitignore
+├── .lintstagedrc.json
+├── .prettierignore
+├── .prettierrc
+├── .snyk
+├── .stylelintignore
+├── .stylelintrc
+├── babel.config.js
+├── jsconfig.json
 ├── next-config.js
 ├── package.json
 ├── yarn.lock
