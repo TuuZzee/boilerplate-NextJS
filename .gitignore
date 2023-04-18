@@ -2,15 +2,11 @@
 # Created by https://www.gitignore.io/api/node,react,dotenv,firebase
 # Edit at https://www.gitignore.io/?templates=node,react,dotenv,firebase
 
-### VSCode ###
-.vscode/
-
 ### Code analysis tool DeepCode/Snyk ###
 .dccache
 
 ### dotenv ###
 .env
-.env.local
 
 ### Firebase ###
 .idode_modules/*
