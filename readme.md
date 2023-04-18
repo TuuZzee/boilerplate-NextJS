@@ -27,10 +27,6 @@ packages pre-installed and pre-configured:
   development experience._
 - [styled-components](https://styled-components.com/) _Visual primitives for the component age. Use
   the best bits of ES6 and CSS to style your apps without stress_
-- [Serverless-NextJS](https://github.com/serverless-nextjs/serverless-next.js) _A zero configuration
-  Next.js serverless component for AWS Lambda@Edge aiming for full feature parity._ and some others
-  always usefull and cool packages such as BigNumber, Moment, Lodash/fp ... [Note]: for more details
-  check the `package.json` file.
 
 [Notes]: Comes with prebuild localization support (defaulted to en/ko) and dark/ligth mode support
 ready.
@@ -109,9 +105,6 @@ Here is the complete structure:
 .
 ├── .github/                   # Workflow files (Github Actions)
 ├── .husky/                    # Husky config and scripts (pre-commits hook)
-├── build/                     # Build Folders for config files
-│ ├── production/              # Production Env config files (serverless + .env)
-│ ├── qa/                      # QA Env config files (serverless + .env)
 ├── pages/                     # Pages folder
 ├── public/                    # Public assets
 │ ├── img/                     # img assets
