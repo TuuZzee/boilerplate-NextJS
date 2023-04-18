@@ -1,18 +1,16 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-styled-components",
-    "stylelint-config-recommended",
-  ],
-  "syntax": "scss",
+  "processors": ["stylelint-processor-styled-components"],
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-styled-components"],
+  "customSyntax": "postcss-scss",
   "rules": {
-    "at-rule-empty-line-before": ["always", { "except": ["after-same-name", "first-nested"] }],
     "declaration-colon-newline-after": null,
     "declaration-empty-line-before": null,
-    "function-name-case": null,
-    "indentation": null,
-    "no-eol-whitespace": null,
-    "value-keyword-case": null,
-    "value-list-comma-newline-after": null
+    "keyframes-name-pattern": null,
+    "max-line-length": null,
+    "no-descending-specificity": null,
+    "selector-type-case": ["lower", { "ignoreTypes": ["/^\\$\\w+/"] }],
+    "selector-type-no-unknown": [true, { "ignoreTypes": ["/-styled-mixin/", "/^\\$\\w+/"] }],
+    "string-quotes": "single",
+    "value-keyword-case": ["lower", { "ignoreKeywords": ["dummyValue"] }]
   }
 }

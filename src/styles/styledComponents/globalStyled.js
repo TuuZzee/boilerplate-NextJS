@@ -3,13 +3,14 @@ import { createGlobalStyle } from 'styled-components';
 import { colors } from '../theme';
 
 export const GlobalStyles = createGlobalStyle`
-  * { font-family: 'Spoqa Han Sans', Sans-serif; }
+  * { font-family: 'Spoqa Han Sans', sans-serif; }
 
   root { font-size: 16px; }
 
   @media (max-width: 801px) {
     :root { font-size: 15px; }
   }
+
   @media (max-width: 480px) {
     :root { font-size: 14px; }
   }
