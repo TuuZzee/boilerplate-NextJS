@@ -40,7 +40,7 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-function App({ Component, pageProps }) {
+const App = function ({ Component, pageProps }) {
   const store = useStore();
 
   // const rrfProps = {
@@ -55,10 +55,10 @@ function App({ Component, pageProps }) {
       <Head>
         {/* Meta */}
         <meta charSet="utf-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
         <meta
-          name="viewport"
           content="width=device-width, maximum-scale=1, user-scalable=no, initial-scale=1, shrink-to-fit=no"
+          name="viewport"
         />
       </Head>
       <Provider store={store}>
@@ -69,12 +69,12 @@ function App({ Component, pageProps }) {
               <ThemeHandler>
                 <LocaleContextProvider>
                   <ReduxToastr
-                    preventDuplicates
+                    closeOnToastrClick
                     position="top-right"
+                    preventDuplicates
+                    progressBar
                     transitionIn="bounceInDown"
                     transitionOut="bounceOutUp"
-                    closeOnToastrClick
-                    progressBar
                   />
                   <GlobalStyles />
                   <Component {...pageProps} />
@@ -89,7 +89,7 @@ function App({ Component, pageProps }) {
       </Provider>
     </ErrorBoundary>
   );
-}
+};
 
 App.propTypes = {
   Component: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({})]).isRequired,

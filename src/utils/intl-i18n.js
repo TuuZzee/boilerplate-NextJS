@@ -36,3 +36,11 @@ export const getClientLocale = async () => {
 };
 
 export const formatHtmlMessage = message => parse(sanitizeHtml(message));
+
+export const formattedNumber = (currency, num) => {
+  return new Intl.NumberFormat(window.navigator.language, {
+    style: 'currency',
+    maximumFractionDigits: 2,
+    currency,
+  }).format(num / 100);
+};
