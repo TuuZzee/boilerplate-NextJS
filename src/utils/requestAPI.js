@@ -2,6 +2,7 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import localforage from 'localforage';
 import { cloneDeep } from 'lodash/fp';
+import qs from 'qs';
 import { toastr } from 'react-redux-toastr';
 
 import { localeStorageId } from 'src/contexts/LocaleContext';
@@ -37,6 +38,9 @@ const requestAPI = axios.create({
   baseURL: `${API.host}/`,
   headers: { 'Content-Type': 'application/json' },
   timeout,
+  paramsSerializer: {
+    serialize: params => qs.stringify(params, { arrayFormat: 'repeat' }),
+  },
 });
 
 axiosRetry(axios, { retryDelay: axiosRetry.exponentialDelay });

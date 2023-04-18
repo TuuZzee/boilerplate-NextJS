@@ -7,7 +7,7 @@ function TodoItem({ todo, remove }) {
   return (
     <List.Item style={{ listStyle: 'none' }}>
       {todo.text}
-      <Button type="button" onClick={() => remove(todo)}>
+      <Button onClick={() => remove(todo)} type="button">
         x
       </Button>
     </List.Item>

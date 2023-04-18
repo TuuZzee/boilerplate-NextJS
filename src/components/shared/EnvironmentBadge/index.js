@@ -6,7 +6,7 @@ function EnvironmentBadge() {
   return (
     process.env.NEXT_PUBLIC_APP_ENV !== 'production' && (
       <EnvBadgeBlock>
-        <EnvBadgeMessage type="error" description={process.env.NEXT_PUBLIC_APP_ENV} />
+        <EnvBadgeMessage description={process.env.NEXT_PUBLIC_APP_ENV} type="error" />
       </EnvBadgeBlock>
     )
   );

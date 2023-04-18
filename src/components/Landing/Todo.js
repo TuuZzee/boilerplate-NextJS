@@ -31,7 +31,7 @@ function Todo({ todos, addTodo, removeTodo }) {
           <Form onSubmit={handleAddTodo}>
             <Form.Group>
               <Form.ControlLabel>Add ToDo:</Form.ControlLabel>
-              <Form.Control onChange={handleTextChange} name="addTodoInput" value={text} />
+              <Form.Control name="addTodoInput" onChange={handleTextChange} value={text} />
               <Form.HelpText>Required</Form.HelpText>
             </Form.Group>
             <Form.Group>
@@ -46,7 +46,7 @@ function Todo({ todos, addTodo, removeTodo }) {
           <div>
             <List>
               {todos.map((todo, i) => (
-                <TodoItem key={`#${i.toString()}-todo`} todo={todo} remove={removeTodo} />
+                <TodoItem key={`#${i.toString()}-todo`} remove={removeTodo} todo={todo} />
               ))}
             </List>
           </div>
