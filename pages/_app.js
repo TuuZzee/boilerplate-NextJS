@@ -1,21 +1,15 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import React from 'react';
 
 import Head from 'next/head';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
-// To enable Firebase/Firestore config needs add a valid Firebase app keys to .env.local
-// import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-// import { createFirestoreInstance } from 'redux-firestore';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { Provider, useStore } from 'react-redux';
+import { Provider } from 'react-redux';
 import ReduxToastr from 'react-redux-toastr';
 
 import ErrorBoundary from 'src/components/shared/ErrorBoundary';
-// import firebaseApp from 'src/utils/firebaseApp';
 import ThemeHandler from 'src/components/shared/ThemeHandler';
 import LocaleContextProvider from 'src/contexts/LocaleContext';
 import RoutingContextProvider from 'src/contexts/RoutingContext';
@@ -29,26 +23,14 @@ import 'src/styles/index.scss';
 
 const queryClient = new QueryClient();
 
-// const rrfConfig = {
-//   userProfile: null,
-//   // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-// };
-
 // Top Progress bar
 NProgress.configure();
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-const App = function ({ Component, pageProps }) {
-  const store = useStore();
-
-  // const rrfProps = {
-  //   firebase: firebaseApp,
-  //   config: rrfConfig,
-  //   dispatch: store.dispatch,
-  //   createFirestoreInstance,
-  // };
+const App = function ({ Component, pageProps, ...rest }) {
+  const { store, props } = wrapper.useWrappedStore(rest);
 
   return (
     <ErrorBoundary errorLevel={constants.ERRORS_LEVELS.application}>
@@ -62,7 +44,6 @@ const App = function ({ Component, pageProps }) {
         />
       </Head>
       <Provider store={store}>
-        {/* <ReactReduxFirebaseProvider {...rrfProps}> */}
         <QueryClientProvider client={queryClient}>
           <RoutingContextProvider>
             <UiUxContextProvider>
@@ -77,7 +58,7 @@ const App = function ({ Component, pageProps }) {
                     transitionOut="bounceOutUp"
                   />
                   <GlobalStyles />
-                  <Component {...pageProps} />
+                  <Component {...pageProps} {...props.pageProps} />
                 </LocaleContextProvider>
               </ThemeHandler>
             </UiUxContextProvider>
@@ -96,4 +77,4 @@ App.propTypes = {
   pageProps: PropTypes.shape({}).isRequired,
 };
 
-export default wrapper.withRedux(App);
+export default App;

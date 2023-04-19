@@ -110,6 +110,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-one-expression-per-line': 'off', // Conflicts with prettier
     'react/jsx-curly-newline': 'off', // Conflicts with prettier
+    'react/jsx-props-no-spreading': 'off', // Off since prop-types should protect agains this
     'react/prop-types': ['error', { ignore: ['containerStore'] }],
     'security/detect-object-injection': 'off',
   },
