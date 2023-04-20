@@ -27,6 +27,7 @@ packages pre-installed and pre-configured:
   development experience._
 - [styled-components](https://styled-components.com/) _Visual primitives for the component age. Use
   the best bits of ES6 and CSS to style your apps without stress_
+- [Jest](https://github.com/facebook/jest) _Delightful JavaScript Testing_
 
 [Notes]: Comes with prebuild localization support (defaulted to en/ko) and dark/ligth mode support
 ready.
@@ -151,4 +152,10 @@ Validate CSS and Styled Component code with StyleLint:
 
 ```sh
 yarn cssLint
+```
+
+Run unit-tests suites and scenarios:
+
+```sh
+yarn test
 ```

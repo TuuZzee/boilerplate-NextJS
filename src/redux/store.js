@@ -14,7 +14,7 @@ const createWithMiddleware =
     ? applyMiddleware(...middlewares)
     : composeWithDevTools(applyMiddleware(...middlewares));
 
-const makeStore = initialState => {
+export const makeStore = initialState => {
   return createStore(reducer, initialState, createWithMiddleware);
 };
 

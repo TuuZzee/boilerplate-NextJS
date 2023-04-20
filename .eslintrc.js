@@ -1,5 +1,9 @@
 module.exports = {
-  env: { browser: true, es6: true },
+  env: {
+    browser: true,
+    es6: true,
+    'jest/globals': true,
+  },
   extends: [
     'airbnb',
     'eslint:recommended',
@@ -24,6 +28,7 @@ module.exports = {
   },
   plugins: [
     'import',
+    'jest',
     'jsx-a11y',
     'lodash-fp',
     'no-secrets',
@@ -62,6 +67,11 @@ module.exports = {
         pathGroupsExcludedImportTypes: ['builtin', 'react'],
       },
     ],
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
